@@ -20,7 +20,11 @@ import com.example.ui.elements.text.TextTitle3
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-internal fun JobSearchCard(modifier: Modifier = Modifier) {
+internal fun JobSearchCard(
+    modifier: Modifier = Modifier,
+    displayText: String,
+    onValueChangeListener: (String) -> Unit
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -34,7 +38,8 @@ internal fun JobSearchCard(modifier: Modifier = Modifier) {
                 text = stringResource(id = R.string.job_search),
                 color = JobSearchTheme.colors.basicWhite
             )
-            JobSearchTextField(displayText = "") {
+            JobSearchTextField(displayText = displayText) {
+                onValueChangeListener(it)
             }
             Row {
                 BlueButton2(
@@ -53,5 +58,5 @@ internal fun JobSearchCard(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun JobSearchCardPreview() {
-    JobSearchCard()
+    JobSearchCard(displayText = "") {}
 }

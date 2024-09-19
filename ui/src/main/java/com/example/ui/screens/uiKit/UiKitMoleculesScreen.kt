@@ -11,6 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.ui.molecules.cards.EmployeeSearchCard
 import com.example.ui.molecules.cards.JobSearchCard
 import com.example.ui.theme.JobSearchTheme
 
@@ -28,7 +29,10 @@ fun UiKitMoleculesScreen() {
                 end = 16.dp
             ), verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            JobSearchCard()
+            JobSearchCard(displayText = displayText) {
+                displayText = it
+            }
+            EmployeeSearchCard()
         }
     }
 }

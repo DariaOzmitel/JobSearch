@@ -2,5 +2,8 @@
 <resources>
     <string name="resume">Продолжить</string>
     <string name="job_search">Поиск работы</string>
+    <string name="search_employees">Поиск сотрудников</string>
+    <string name="search_employees_text">Размещение вакансий и доступ к базе резюме</string>
     <string name="log_in_with_password">Войти с паролем</string>
+    <string name="looking_for_employees">Я ищу сотрудников</string>
 </resources>
