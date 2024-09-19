@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="resume">Продолжить</string>
+    <string name="job_search">Поиск работы</string>
+    <string name="log_in_with_password">Войти с паролем</string>
 </resources>

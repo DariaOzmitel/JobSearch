@@ -15,7 +15,7 @@ import com.example.ui.elements.text.ButtonText1
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-fun GreenButton(
+internal fun GreenButton(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: String,

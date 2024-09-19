@@ -15,7 +15,7 @@ import com.example.ui.elements.text.ButtonText2
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-fun BlueButton2(
+internal fun BlueButton2(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     text: String,
