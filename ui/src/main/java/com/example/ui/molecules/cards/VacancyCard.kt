@@ -21,14 +21,14 @@ import com.example.ui.R
 import com.example.ui.elements.buttons.GreenButton
 import com.example.ui.elements.text.Text1
 import com.example.ui.elements.text.TextTitle3
-import com.example.ui.items.VacancyUI
+import com.example.ui.items.VacancyCardUI
 import com.example.ui.mockVacancy
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
 internal fun VacancyCard(
     modifier: Modifier = Modifier,
-    vacancy: VacancyUI,
+    vacancy: VacancyCardUI,
     onCardClickListener: () -> Unit
 ) {
     Box(

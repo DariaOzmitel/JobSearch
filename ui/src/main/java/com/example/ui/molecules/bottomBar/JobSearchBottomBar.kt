@@ -15,6 +15,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import com.example.ui.elements.text.TabText
 import com.example.ui.navigation.BottomNavigationItem
 import com.example.ui.navigation.NavigationState
+import com.example.ui.theme.JobSearchTheme
 
 @Composable
 internal fun JobSearchBottomBar(
@@ -48,6 +49,8 @@ internal fun JobSearchBottomBar(
                 label = { TabText(text = stringResource(id = item.titleResId)) },
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color.Transparent,
+                    selectedIconColor = JobSearchTheme.colors.specialBlue,
+                    selectedTextColor = JobSearchTheme.colors.specialBlue
                 )
             )
         }

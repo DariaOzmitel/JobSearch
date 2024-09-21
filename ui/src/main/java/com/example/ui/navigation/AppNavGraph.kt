@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 fun AppNavGraph(
     navHostController: NavHostController,
     mainScreenContent: @Composable () -> Unit,
+    vacanciesByMatchScreenContent: @Composable () -> Unit,
     favoritesScreenContent: @Composable () -> Unit,
     responsesScreenContent: @Composable () -> Unit,
     messagesScreenContent: @Composable () -> Unit,
@@ -18,9 +19,10 @@ fun AppNavGraph(
         navController = navHostController,
         startDestination = Screen.Search.route
     ) {
-        composable(Screen.Search.route) {
-            mainScreenContent()
-        }
+        searchNavGraph(
+            mainScreenContent = mainScreenContent,
+            vacanciesByMatchScreenContent = vacanciesByMatchScreenContent
+        )
         composable(Screen.Favorites.route) {
             favoritesScreenContent()
         }

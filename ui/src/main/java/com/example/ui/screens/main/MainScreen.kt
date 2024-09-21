@@ -31,7 +31,11 @@ import com.example.ui.theme.JobSearchTheme
 private const val MAX_VACANCIES_CARD = 3
 
 @Composable
-fun MainScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
+fun MainScreen(
+    modifier: Modifier = Modifier,
+    innerPadding: PaddingValues,
+    onButtonClickListener: () -> Unit
+) {
     var displayText by rememberSaveable {
         mutableStateOf("")
     }
@@ -89,7 +93,9 @@ fun MainScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
                         stringResource(id = R.string.more_vacancy_count),
                         invisibleVacanciesCount
                     )
-                )
+                ) {
+                    onButtonClickListener()
+                }
             }
         }
     }
@@ -98,5 +104,5 @@ fun MainScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
 @Preview
 @Composable
 private fun MainScreenPreview() {
-    MainScreen(innerPadding = PaddingValues(0.dp))
+    MainScreen(innerPadding = PaddingValues(0.dp)) {}
 }

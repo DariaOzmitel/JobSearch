@@ -1,6 +1,6 @@
 package com.example.ui.items
 
-data class VacancyUI(
+data class VacancyCardUI(
     val lookingNumber: Int? = null,
     val title: String,
     val town: String? = null,

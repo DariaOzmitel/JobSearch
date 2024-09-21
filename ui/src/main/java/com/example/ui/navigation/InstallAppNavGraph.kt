@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.ui.R
+import com.example.ui.screens.main.MainScreen
 import com.example.ui.screens.root.RootScreen
 import com.example.ui.screens.vacanciesByMatch.VacanciesByMatchScreen
 
@@ -18,7 +19,9 @@ fun InstallAppNavGraph() {
         navHostController = navigationState.navHostController,
         mainScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
-                VacanciesByMatchScreen(innerPadding = innerPadding)
+                MainScreen(innerPadding = innerPadding) {
+                    navigationState.navigateTo(Screen.VacanciesByMatch.route)
+                }
             }
         },
         favoritesScreenContent = {},
@@ -59,6 +62,11 @@ fun InstallAppNavGraph() {
                         id = R.string.profile
                     )
                 )
+            }
+        },
+        vacanciesByMatchScreenContent = {
+            RootScreen(navigationState = navigationState) { innerPadding ->
+                VacanciesByMatchScreen(innerPadding = innerPadding)
             }
         }
     )

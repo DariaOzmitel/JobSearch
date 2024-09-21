@@ -2,6 +2,7 @@ package com.example.ui.elements
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +28,7 @@ internal fun JobSearchTextField(
     hintText: String? = null,
     hintImage: Painter? = null,
     displayText: String,
+    onIconClickListener: () -> Unit = {},
     onValueChange: (String) -> Unit
 ) {
     Box(
@@ -49,6 +51,7 @@ internal fun JobSearchTextField(
                         Image(
                             modifier = Modifier
                                 .padding(end = 4.dp)
+                                .clickable { onIconClickListener() }
                                 .size(20.dp),
                             painter = it,
                             contentDescription = stringResource(
