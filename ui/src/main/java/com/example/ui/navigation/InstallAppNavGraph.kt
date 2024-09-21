@@ -9,6 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.ui.R
 import com.example.ui.screens.root.RootScreen
+import com.example.ui.screens.vacanciesByMatch.VacanciesByMatchScreen
 
 @Composable
 fun InstallAppNavGraph() {
@@ -17,15 +18,7 @@ fun InstallAppNavGraph() {
         navHostController = navigationState.navHostController,
         mainScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    painter = painterResource(id = R.drawable.responses_example),
-                    contentDescription = stringResource(
-                        id = R.string.responses
-                    )
-                )
+                VacanciesByMatchScreen(innerPadding = innerPadding)
             }
         },
         favoritesScreenContent = {},
@@ -50,7 +43,7 @@ fun InstallAppNavGraph() {
                         .padding(innerPadding),
                     painter = painterResource(id = R.drawable.messages_example),
                     contentDescription = stringResource(
-                        id = R.string.responses
+                        id = R.string.messages
                     )
                 )
             }
@@ -63,7 +56,7 @@ fun InstallAppNavGraph() {
                         .padding(innerPadding),
                     painter = painterResource(id = R.drawable.profile_examples),
                     contentDescription = stringResource(
-                        id = R.string.responses
+                        id = R.string.profile
                     )
                 )
             }

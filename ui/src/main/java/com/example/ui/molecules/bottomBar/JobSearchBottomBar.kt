@@ -1,4 +1,4 @@
-package com.example.ui.molecules.cards.bottomBar
+package com.example.ui.molecules.bottomBar
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.BottomAppBar
