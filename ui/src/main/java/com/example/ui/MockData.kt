@@ -1,29 +1,29 @@
 package com.example.ui
 
-import com.example.ui.models.RecommendationUI
+import com.example.ui.models.OfferUI
 import com.example.ui.models.VacancyCardUI
 
-val mockRecommendation = RecommendationUI(
+val mockRecommendation = OfferUI(
     iconResId = R.drawable.favorites,
     title = "Временная работа или подработка",
     buttonText = "Полезные статьи и советы"
 )
 val mockRecommendationList = listOf(
-    RecommendationUI(
+    OfferUI(
         iconResId = R.drawable.favorites,
         title = "Временная работа или подработка",
         buttonText = "Полезные статьи и советы"
     ),
-    RecommendationUI(
+    OfferUI(
         iconResId = R.drawable.favorites,
         title = "Временная работа или подработка",
         buttonText = "Полезные статьи и советы"
     ),
-    RecommendationUI(
+    OfferUI(
         iconResId = R.drawable.favorites,
         title = "Временная работа или подработка",
     ),
-    RecommendationUI(
+    OfferUI(
         iconResId = R.drawable.favorites,
         title = "Временная работа или подработка",
         buttonText = "Полезные статьи и советы"

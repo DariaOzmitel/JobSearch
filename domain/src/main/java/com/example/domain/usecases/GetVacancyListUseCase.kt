@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.domain.usecases
 
 import com.example.domain.models.Vacancy
 import com.example.domain.repository.JobSearchRepository

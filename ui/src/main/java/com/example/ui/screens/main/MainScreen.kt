@@ -26,6 +26,7 @@ import com.example.ui.elements.text.TextTitle2
 import com.example.ui.ignoreHorizontalParentPadding
 import com.example.ui.mockRecommendationList
 import com.example.ui.mockVacanciesList
+import com.example.ui.models.OfferUI
 import com.example.ui.models.VacancyCardUI
 import com.example.ui.molecules.cards.RecommendationBlock
 import com.example.ui.molecules.cards.VacancyCard
@@ -52,7 +53,8 @@ fun MainScreen(
             MainScreenContent(
                 modifier = modifier,
                 innerPadding = innerPadding,
-                vacancyList = state.vacancyList
+                vacancyList = state.vacancyList,
+                offerList = state.offerList
             ) {
                 onButtonClickListener()
             }
@@ -65,6 +67,7 @@ private fun MainScreenContent(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     vacancyList: List<VacancyCardUI>,
+    offerList: List<OfferUI>,
     onButtonClickListener: () -> Unit
 ) {
     val invisibleVacanciesCount = vacancyList.size - MAX_VISIBLE_VACANCIES_CARD
@@ -103,7 +106,7 @@ private fun MainScreenContent(
                 modifier = Modifier
                     .ignoreHorizontalParentPadding()
                     .padding(bottom = 32.dp),
-                recommendationList = mockRecommendationList
+                recommendationList = offerList
             )
         }
         item {
@@ -135,5 +138,9 @@ private fun MainScreenContent(
 @Preview
 @Composable
 private fun MainScreenPreview() {
-    MainScreenContent(innerPadding = PaddingValues(0.dp), vacancyList = mockVacanciesList) {}
+    MainScreenContent(
+        innerPadding = PaddingValues(0.dp),
+        vacancyList = mockVacanciesList,
+        offerList = mockRecommendationList
+    ) {}
 }

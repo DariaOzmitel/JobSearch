@@ -2,7 +2,7 @@ package com.example.ui.screens.vacanciesByMatch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.GetVacancyListUseCase
+import com.example.domain.usecases.GetVacancyListUseCase
 import com.example.ui.mapper.DomainToUiMapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

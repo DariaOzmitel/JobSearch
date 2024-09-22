@@ -1,11 +1,13 @@
 package com.example.data.mapper
 
+import com.example.data.network.models.OfferDto
 import com.example.data.network.models.VacancyDto
 import com.example.domain.models.Address
+import com.example.domain.models.Offer
 import com.example.domain.models.Vacancy
 
 class DtoToEntityMapper {
-    fun mapDtoToEntity(dto: VacancyDto) =
+    fun mapVacancyDtoToEntity(dto: VacancyDto) =
         dto.run {
             Vacancy(
                 id = id,
@@ -22,7 +24,21 @@ class DtoToEntityMapper {
             )
         }
 
-    fun mapDtoListToEntityList(dtoList: List<VacancyDto>?) = dtoList?.map {
-        mapDtoToEntity(it)
+    fun mapVacancyDtoListToEntityList(dtoList: List<VacancyDto>?) = dtoList?.map {
+        mapVacancyDtoToEntity(it)
+    }
+
+    fun mapOfferDtoToEntity(dto: OfferDto) =
+        dto.run {
+            Offer(
+                id = id,
+                title = title,
+                link = link,
+                buttonText = button?.text
+            )
+        }
+
+    fun mapOfferDtoListToEntityList(dtoList: List<OfferDto>?) = dtoList?.map {
+        mapOfferDtoToEntity(it)
     }
 }
