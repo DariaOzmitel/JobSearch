@@ -1,7 +1,7 @@
 package com.example.ui
 
-import com.example.ui.items.RecommendationUI
-import com.example.ui.items.VacancyCardUI
+import com.example.ui.models.RecommendationUI
+import com.example.ui.models.VacancyCardUI
 
 val mockRecommendation = RecommendationUI(
     iconResId = R.drawable.favorites,
@@ -41,11 +41,6 @@ val mockVacancy = VacancyCardUI(
 
 val mockVacanciesList = listOf(
     mockVacancy,
-    VacancyCardUI(
-        title = "UI/UX дизайнер",
-        company = "Мобирикс",
-        publishedDate = "20 февраля"
-    ),
     mockVacancy,
     mockVacancy,
     mockVacancy,

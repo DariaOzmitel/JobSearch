@@ -1,4 +1,4 @@
-package com.example.ui.items
+package com.example.ui.models
 
 import androidx.annotation.DrawableRes
 

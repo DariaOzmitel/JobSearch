@@ -21,8 +21,8 @@ import com.example.ui.R
 import com.example.ui.elements.buttons.GreenButton
 import com.example.ui.elements.text.Text1
 import com.example.ui.elements.text.TextTitle3
-import com.example.ui.items.VacancyCardUI
 import com.example.ui.mockVacancy
+import com.example.ui.models.VacancyCardUI
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
@@ -60,7 +60,7 @@ internal fun VacancyCard(
                 text = vacancy.title,
                 color = JobSearchTheme.colors.basicWhite
             )
-            vacancy.town?.let {
+            vacancy.town.let {
                 Text1(
                     modifier = Modifier.padding(bottom = 4.dp),
                     text = it,
@@ -79,7 +79,7 @@ internal fun VacancyCard(
                     contentDescription = ""
                 )
             }
-            vacancy.experienceText?.let {
+            vacancy.experienceText.let {
                 Row(modifier = Modifier.padding(bottom = 10.dp)) {
                     Image(
                         modifier = Modifier.padding(end = 8.dp),

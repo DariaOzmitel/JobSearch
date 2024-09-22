@@ -1,10 +1,12 @@
-package com.example.ui.items
+package com.example.ui.models
 
 data class VacancyCardUI(
     val lookingNumber: Int? = null,
     val title: String,
-    val town: String? = null,
+    val town: String,
     val company: String,
-    val experienceText: String? = null,
+    val experienceText: String,
     val publishedDate: String,
 )
+
+

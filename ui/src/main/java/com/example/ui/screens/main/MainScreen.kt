@@ -17,18 +17,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui.R
 import com.example.ui.elements.JobSearchTextField
+import com.example.ui.elements.ProgressIndicator
 import com.example.ui.elements.buttons.BlueButton1
 import com.example.ui.elements.text.TextTitle2
 import com.example.ui.ignoreHorizontalParentPadding
 import com.example.ui.mockRecommendationList
-import com.example.ui.mockVacanciesList
+import com.example.ui.models.VacancyCardUI
 import com.example.ui.molecules.cards.RecommendationBlock
 import com.example.ui.molecules.cards.VacancyCard
 import com.example.ui.theme.JobSearchTheme
+import org.koin.androidx.compose.koinViewModel
 
-private const val MAX_VACANCIES_CARD = 3
+private const val MAX_VISIBLE_VACANCIES_CARD = 3
 
 @Composable
 fun MainScreen(
@@ -36,10 +39,37 @@ fun MainScreen(
     innerPadding: PaddingValues,
     onButtonClickListener: () -> Unit
 ) {
+
+    val viewModel: MainScreenViewModel = koinViewModel()
+    val mainState by viewModel.getMainState().collectAsStateWithLifecycle()
+
+    when (val state = mainState) {
+        is MainState.Loading ->
+            ProgressIndicator()
+
+        is MainState.VacancyList -> {
+            MainScreenContent(
+                modifier = modifier,
+                innerPadding = innerPadding,
+                vacancyList = state.vacancyList
+            ) {
+                onButtonClickListener()
+            }
+        }
+    }
+}
+
+@Composable
+private fun MainScreenContent(
+    modifier: Modifier = Modifier,
+    innerPadding: PaddingValues,
+    vacancyList: List<VacancyCardUI>,
+    onButtonClickListener: () -> Unit
+) {
+    val invisibleVacanciesCount = vacancyList.size - MAX_VISIBLE_VACANCIES_CARD
     var displayText by rememberSaveable {
         mutableStateOf("")
     }
-    val invisibleVacanciesCount = mockVacanciesList.size - MAX_VACANCIES_CARD
     LazyColumn(
         modifier = modifier.padding(
             start = 16.dp,
@@ -82,7 +112,7 @@ fun MainScreen(
                 color = JobSearchTheme.colors.basicWhite
             )
         }
-        items(mockVacanciesList.take(MAX_VACANCIES_CARD)) {
+        items(vacancyList.take(MAX_VISIBLE_VACANCIES_CARD)) {
             VacancyCard(modifier = Modifier.padding(bottom = 16.dp), vacancy = it) {
             }
         }

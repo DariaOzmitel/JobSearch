@@ -21,9 +21,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ui.elements.text.Text1
 import com.example.ui.elements.text.TextTitle4
-import com.example.ui.items.RecommendationUI
 import com.example.ui.mockRecommendation
 import com.example.ui.mockRecommendationList
+import com.example.ui.models.RecommendationUI
 import com.example.ui.theme.JobSearchTheme
 
 private const val MAX_TITLE_LINES_WITH_BUTTON = 2
