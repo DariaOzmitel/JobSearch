@@ -25,6 +25,7 @@ import com.example.ui.elements.buttons.BlueButton1
 import com.example.ui.elements.text.TextTitle2
 import com.example.ui.ignoreHorizontalParentPadding
 import com.example.ui.mockRecommendationList
+import com.example.ui.mockVacanciesList
 import com.example.ui.models.VacancyCardUI
 import com.example.ui.molecules.cards.RecommendationBlock
 import com.example.ui.molecules.cards.VacancyCard
@@ -134,5 +135,5 @@ private fun MainScreenContent(
 @Preview
 @Composable
 private fun MainScreenPreview() {
-    MainScreen(innerPadding = PaddingValues(0.dp)) {}
+    MainScreenContent(innerPadding = PaddingValues(0.dp), vacancyList = mockVacanciesList) {}
 }
