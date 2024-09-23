@@ -6,6 +6,13 @@ data class Vacancy(
     val title: String,
     val address: Address,
     val company: String,
+    val experiencePreviewText: String,
     val experienceText: String,
     val publishedDate: String,
+    val salary: String,
+    val schedules: String,
+    val appliedNumber: Int?,
+    val description: String?,
+    val responsibilities: String,
+    val questions: List<String>
 )

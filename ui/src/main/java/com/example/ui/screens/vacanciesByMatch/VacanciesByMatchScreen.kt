@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,7 +30,10 @@ import com.example.ui.theme.JobSearchTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun VacanciesByMatchScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
+fun VacanciesByMatchScreen(
+    modifier: Modifier = Modifier, innerPadding: PaddingValues,
+    onCardClickListener: (String) -> Unit,
+) {
     val viewModel: VacancyByMatchScreenViewModel = koinViewModel()
     val vacancyByMatchState by viewModel.getVacancyByMatchState().collectAsStateWithLifecycle()
 
@@ -41,7 +45,8 @@ fun VacanciesByMatchScreen(modifier: Modifier = Modifier, innerPadding: PaddingV
             VacanciesByMatchScreenContent(
                 modifier = modifier,
                 innerPadding = innerPadding,
-                vacancyList = state.vacancyList
+                vacancyList = state.vacancyList,
+                onCardClickListener = onCardClickListener
             )
         }
     }
@@ -51,7 +56,8 @@ fun VacanciesByMatchScreen(modifier: Modifier = Modifier, innerPadding: PaddingV
 private fun VacanciesByMatchScreenContent(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
-    vacancyList: List<VacancyCardUI>
+    vacancyList: List<VacancyCardUI>,
+    onCardClickListener: (String) -> Unit,
 ) {
     var displayText by rememberSaveable {
         mutableStateOf("")
@@ -88,8 +94,9 @@ private fun VacanciesByMatchScreenContent(
             Row(modifier = Modifier.padding(bottom = 24.dp)) {
                 Text1(
                     modifier = Modifier.weight(1f),
-                    text = String.format(
-                        stringResource(id = R.string.vacancies_count),
+                    text = LocalContext.current.resources.getQuantityString(
+                        R.plurals.vacancies_count,
+                        vacanciesCount,
                         vacanciesCount
                     ),
                     color = JobSearchTheme.colors.basicWhite
@@ -104,6 +111,7 @@ private fun VacanciesByMatchScreenContent(
         }
         items(vacancyList) {
             VacancyCard(modifier = Modifier.padding(bottom = 16.dp), vacancy = it) {
+                onCardClickListener(it.id)
             }
         }
     }
@@ -112,5 +120,8 @@ private fun VacanciesByMatchScreenContent(
 @Preview
 @Composable
 private fun VacanciesByMatchScreenPreview() {
-    VacanciesByMatchScreenContent(innerPadding = PaddingValues(0.dp), vacancyList = mockVacanciesList)
+    VacanciesByMatchScreenContent(
+        innerPadding = PaddingValues(0.dp),
+        vacancyList = mockVacanciesList
+    ) {}
 }

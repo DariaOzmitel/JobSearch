@@ -10,6 +10,7 @@ fun AppNavGraph(
     navHostController: NavHostController,
     mainScreenContent: @Composable () -> Unit,
     vacanciesByMatchScreenContent: @Composable () -> Unit,
+    vacancyScreenContent: @Composable () -> Unit,
     favoritesScreenContent: @Composable () -> Unit,
     responsesScreenContent: @Composable () -> Unit,
     messagesScreenContent: @Composable () -> Unit,
@@ -21,7 +22,8 @@ fun AppNavGraph(
     ) {
         searchNavGraph(
             mainScreenContent = mainScreenContent,
-            vacanciesByMatchScreenContent = vacanciesByMatchScreenContent
+            vacanciesByMatchScreenContent = vacanciesByMatchScreenContent,
+            vacancyScreenContent = vacancyScreenContent
         )
         composable(Screen.Favorites.route) {
             favoritesScreenContent()

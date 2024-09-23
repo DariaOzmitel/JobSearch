@@ -12,18 +12,40 @@
     <string name="responses">Отклики</string>
     <string name="messages">Сообщения</string>
     <string name="profile">Профиль</string>
-    <string name="current_looking_numbers">Сейчас просматривает %s человек</string>
+    <plurals name="current_looking_numbers">
+        <item quantity="one">Сейчас просматривает %d человек</item>
+        <item quantity="few">Сейчас просматривают %d человека</item>
+        <item quantity="many">Сейчас просматривают %d человек</item>
+        <item quantity="other">Сейчас просматривают %d человек</item>
+    </plurals>
     <string name="publishing_date">Опубликовано %s</string>
     <string name="respond">Откликнуться</string>
     <string name="vacancies_for_you">Вакансии для вас</string>
     <string name="more_vacancy_count">Еще %s вакансии</string>
     <string name="search_field_hint_main">Должность, ключевые слова</string>
     <string name="search_field_hint">Должность по подходящим вакансиям</string>
-    <string name="vacancies_count">%s вакансий</string>
+    <plurals name="vacancies_count">
+        <item quantity="one">%d вакансия</item>
+        <item quantity="few">%d вакансии</item>
+        <item quantity="many">%d вакансий</item>
+        <item quantity="other">%d вакансий</item>
+    </plurals>
     <string name="by_match">По соответствию</string>
     <string name="required_experience">Требуемый опыт: %s</string>
-    <string name="response_number">%s человек уже откликнулись</string>
-    <string name="looking_number">%s человека сейчас смотрят</string>
+    <plurals name="response_number">
+        <item quantity="one">%s человек уже откликнулся</item>
+        <item quantity="few">%s человека уже откликнулись</item>
+        <item quantity="many">%s человек уже откликнулось</item>
+        <item quantity="other">%s человек уже откликнулись</item>
+        <item quantity="zero">Никто пока не откликнулся</item>
+    </plurals>
+    <plurals name="looking_number">
+        <item quantity="one">%s человек сейчас смотрит</item>
+        <item quantity="few">%s человека сейчас смотрят</item>
+        <item quantity="many">%s человек сейчас смотрит</item>
+        <item quantity="other">%s человек сейчас смотрят</item>
+        <item quantity="zero">1 человек сейчас смотрит</item>
+    </plurals>
     <string name="your_tasks">Ваши задачи</string>
     <string name="ask_the_employer_question">Задайте вопрос работодателю</string>
     <string name="employer_question_text">Он получит его с откликом на вакансию</string>

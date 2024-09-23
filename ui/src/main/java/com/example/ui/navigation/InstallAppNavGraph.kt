@@ -11,6 +11,7 @@ import com.example.ui.R
 import com.example.ui.screens.main.MainScreen
 import com.example.ui.screens.root.RootScreen
 import com.example.ui.screens.vacanciesByMatch.VacanciesByMatchScreen
+import com.example.ui.screens.vacancy.VacancyScreen
 
 @Composable
 fun InstallAppNavGraph() {
@@ -19,7 +20,9 @@ fun InstallAppNavGraph() {
         navHostController = navigationState.navHostController,
         mainScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
-                MainScreen(innerPadding = innerPadding) {
+                MainScreen(innerPadding = innerPadding, onCardClickListener = { vacancyId ->
+                    navigationState.navigateToVacancy(vacancyId)
+                }) {
                     navigationState.navigateTo(Screen.VacanciesByMatch.route)
                 }
             }
@@ -66,7 +69,14 @@ fun InstallAppNavGraph() {
         },
         vacanciesByMatchScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
-                VacanciesByMatchScreen(innerPadding = innerPadding)
+                VacanciesByMatchScreen(innerPadding = innerPadding) { vacancyId ->
+                    navigationState.navigateToVacancy(vacancyId)
+                }
+            }
+        },
+        vacancyScreenContent = {
+            RootScreen(navigationState = navigationState) { innerPadding ->
+                VacancyScreen(innerPadding = innerPadding)
             }
         }
     )

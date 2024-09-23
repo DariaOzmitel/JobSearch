@@ -9,7 +9,7 @@ data class VacancyForScreenUi(
     val salary: String,
     val schedules: String,
     val appliedNumber: Int?,
-    val description: String,
+    val description: String?,
     val responsibilities: String,
     val questions: List<String>
 )

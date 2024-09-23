@@ -8,35 +8,47 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.ui.R
+import com.example.ui.elements.ProgressIndicator
 import com.example.ui.elements.QuestionBoxColumn
-import com.example.ui.elements.buttons.GreenButton
+import com.example.ui.elements.buttons.BigGreenButton
 import com.example.ui.elements.text.Text1
 import com.example.ui.elements.text.TextTitle1
 import com.example.ui.elements.text.TextTitle2
 import com.example.ui.elements.text.TextTitle4
-import com.example.ui.mockVacancyForScreen
 import com.example.ui.models.VacancyForScreenUi
 import com.example.ui.molecules.cards.CompanyCard
 import com.example.ui.molecules.cards.GreenCard
 import com.example.ui.orZero
 import com.example.ui.theme.JobSearchTheme
-
-private const val MAX_TEXT_LINES = 2
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun VacancyScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
-    VacancyScreenContent(
-        modifier = modifier,
-        innerPadding = innerPadding,
-        vacancy = mockVacancyForScreen
-    )
+    val viewModel: VacancyScreenViewModel = koinViewModel()
+    val vacancyState by viewModel.getVacancyState().collectAsStateWithLifecycle()
+
+    when (val state = vacancyState) {
+        is VacancyState.Loading ->
+            ProgressIndicator()
+
+        is VacancyState.Vacancy -> {
+            VacancyScreenContent(
+                modifier = modifier,
+                innerPadding = innerPadding,
+                vacancy = state.vacancy
+            )
+        }
+    }
 }
 
 @Composable
@@ -114,16 +126,22 @@ fun VacancyScreenContent(
             ) {
                 GreenCard(
                     modifier = Modifier.weight(1f),
-                    text = stringResource(id = R.string.response_number), painter = painterResource(
-                        id = R.drawable.person
-                    ), argForText = vacancy.appliedNumber.orZero()
+                    text = LocalContext.current.resources.getQuantityString(
+                        R.plurals.response_number,
+                        vacancy.appliedNumber.orZero(),
+                        vacancy.appliedNumber.orZero(),
+                    ),
+                    painter = painterResource(id = R.drawable.person)
                 )
 
                 GreenCard(
                     modifier = Modifier.weight(1f),
-                    text = stringResource(id = R.string.looking_number), painter = painterResource(
-                        id = R.drawable.visible_green
-                    ), argForText = vacancy.lookingNumber.orZero()
+                    text = LocalContext.current.resources.getQuantityString(
+                        R.plurals.looking_number,
+                        vacancy.lookingNumber.orZero(),
+                        vacancy.lookingNumber.orZero(),
+                    ),
+                    painter = painterResource(id = R.drawable.visible_green)
                 )
             }
         }
@@ -135,11 +153,13 @@ fun VacancyScreenContent(
             )
         }
         item {
-            Text1(
-                modifier = Modifier.padding(bottom = 16.dp),
-                text = vacancy.description,
-                color = JobSearchTheme.colors.basicWhite
-            )
+            vacancy.description?.let {
+                Text1(
+                    modifier = Modifier.padding(bottom = 16.dp),
+                    text = it,
+                    color = JobSearchTheme.colors.basicWhite
+                )
+            }
         }
         item {
             TextTitle2(
@@ -176,7 +196,7 @@ fun VacancyScreenContent(
             )
         }
         item {
-            GreenButton(text = stringResource(id = R.string.respond))
+            BigGreenButton(text = stringResource(id = R.string.respond))
         }
     }
 }

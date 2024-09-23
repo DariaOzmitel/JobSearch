@@ -39,7 +39,8 @@ private const val MAX_VISIBLE_VACANCIES_CARD = 3
 fun MainScreen(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
-    onButtonClickListener: () -> Unit
+    onCardClickListener: (String) -> Unit,
+    onButtonClickListener: () -> Unit,
 ) {
 
     val viewModel: MainScreenViewModel = koinViewModel()
@@ -54,7 +55,8 @@ fun MainScreen(
                 modifier = modifier,
                 innerPadding = innerPadding,
                 vacancyList = state.vacancyList,
-                offerList = state.offerList
+                offerList = state.offerList,
+                onCardClickListener = onCardClickListener
             ) {
                 onButtonClickListener()
             }
@@ -68,7 +70,8 @@ private fun MainScreenContent(
     innerPadding: PaddingValues,
     vacancyList: List<VacancyCardUI>,
     offerList: List<OfferUI>,
-    onButtonClickListener: () -> Unit
+    onCardClickListener: (String) -> Unit,
+    onButtonClickListener: () -> Unit,
 ) {
     val invisibleVacanciesCount = vacancyList.size - MAX_VISIBLE_VACANCIES_CARD
     var displayText by rememberSaveable {
@@ -118,6 +121,7 @@ private fun MainScreenContent(
         }
         items(vacancyList.take(MAX_VISIBLE_VACANCIES_CARD)) {
             VacancyCard(modifier = Modifier.padding(bottom = 16.dp), vacancy = it) {
+                onCardClickListener(it.id)
             }
         }
         if (invisibleVacanciesCount > 0) {
@@ -141,6 +145,7 @@ private fun MainScreenPreview() {
     MainScreenContent(
         innerPadding = PaddingValues(0.dp),
         vacancyList = mockVacanciesList,
-        offerList = mockRecommendationList
+        offerList = mockRecommendationList,
+        onCardClickListener = {}
     ) {}
 }

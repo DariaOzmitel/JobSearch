@@ -8,12 +8,16 @@ import androidx.navigation.compose.rememberNavController
 class NavigationState(val navHostController: NavHostController) {
     fun navigateTo(route: String) {
         navHostController.navigate(route) {
-            popUpTo(Screen.Search.route) {
+            popUpTo(Screen.Main.route) {
                 saveState = true
             }
             launchSingleTop = true
             restoreState = true
         }
+    }
+
+    fun navigateToVacancy(vacancyId: String) {
+        navHostController.navigate(route = Screen.Vacancy.getRouteWithArgs(vacancyId))
     }
 }
 

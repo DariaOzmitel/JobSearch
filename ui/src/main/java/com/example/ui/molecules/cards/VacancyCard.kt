@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,8 +49,9 @@ internal fun VacancyCard(
             vacancy.lookingNumber?.let {
                 Text1(
                     modifier = Modifier.padding(bottom = 10.dp),
-                    text = String.format(
-                        stringResource(id = R.string.current_looking_numbers),
+                    text = LocalContext.current.resources.getQuantityString(
+                        R.plurals.current_looking_numbers,
+                        vacancy.lookingNumber,
                         vacancy.lookingNumber
                     ),
                     color = JobSearchTheme.colors.specialGreen

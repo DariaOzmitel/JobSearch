@@ -15,6 +15,12 @@ class JobSearchRepositoryImpl(
         return mapper.mapVacancyDtoListToEntityList(vacancyListDto) ?: emptyList()
     }
 
+    override suspend fun getVacancy(id: String): Vacancy {
+        val vacancyList = getVacancyList()
+        return vacancyList.find { it.id == id }
+            ?: throw NoSuchElementException("Vacancy with id $id not found")
+    }
+
     override suspend fun getOfferList(): List<Offer> {
         val offerListDto = apiService.getOfferList().offers
         return mapper.mapOfferDtoListToEntityList(offerListDto) ?: emptyList()

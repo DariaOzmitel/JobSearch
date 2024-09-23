@@ -35,7 +35,6 @@ internal fun CompanyCard(
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Row(
-                modifier = Modifier.padding(bottom = 10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TextTitle3(

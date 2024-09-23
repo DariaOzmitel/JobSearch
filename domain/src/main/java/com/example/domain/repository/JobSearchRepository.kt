@@ -5,5 +5,6 @@ import com.example.domain.models.Vacancy
 
 interface JobSearchRepository {
     suspend fun getVacancyList(): List<Vacancy>
+    suspend fun getVacancy(id: String): Vacancy
     suspend fun getOfferList(): List<Offer>
 }

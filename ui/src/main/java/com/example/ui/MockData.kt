@@ -32,6 +32,7 @@ val mockRecommendationList = listOf(
 )
 
 val mockVacancy = VacancyCardUI(
+    id = "1",
     lookingNumber = 2,
     title = "UI/UX дизайнер",
     town = "Минск",

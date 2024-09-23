@@ -24,7 +24,6 @@ internal fun GreenCard(
     modifier: Modifier = Modifier,
     text: String,
     painter: Painter,
-    argForText: Int
 ) {
     Box(
         modifier = modifier
@@ -36,7 +35,7 @@ internal fun GreenCard(
                 modifier = Modifier
                     .padding(end = 20.dp)
                     .weight(1f),
-                text = String.format(text, argForText),
+                text = text,
                 maxLines = MAX_TEXT_LINES,
                 color = JobSearchTheme.colors.basicWhite
             )
@@ -49,8 +48,7 @@ internal fun GreenCard(
 @Composable
 private fun GreenCardPreview() {
     GreenCard(
-        text = stringResource(id = R.string.response_number),
+        text = stringResource(id = R.string.respond),
         painter = painterResource(id = R.drawable.person),
-        argForText = 147
     )
 }

@@ -19,8 +19,15 @@ class DtoToEntityMapper {
                     house = address.house
                 ),
                 company = company,
-                experienceText = experience.previewText,
-                publishedDate = publishedDate
+                experiencePreviewText = experience.previewText,
+                publishedDate = publishedDate,
+                salary = salary.full,
+                schedules = schedules.joinToString { it },
+                appliedNumber = appliedNumber,
+                description = description,
+                responsibilities = responsibilities,
+                questions = questions,
+                experienceText = experience.text
             )
         }
 
