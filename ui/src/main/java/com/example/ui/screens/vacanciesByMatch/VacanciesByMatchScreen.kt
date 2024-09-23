@@ -34,14 +34,14 @@ fun VacanciesByMatchScreen(
     modifier: Modifier = Modifier, innerPadding: PaddingValues,
     onCardClickListener: (String) -> Unit,
 ) {
-    val viewModel: VacancyByMatchScreenViewModel = koinViewModel()
+    val viewModel: VacanciesByMatchScreenViewModel = koinViewModel()
     val vacancyByMatchState by viewModel.getVacancyByMatchState().collectAsStateWithLifecycle()
 
     when (val state = vacancyByMatchState) {
-        is VacancyByMatchState.Loading ->
+        is VacanciesByMatchState.Loading ->
             ProgressIndicator()
 
-        is VacancyByMatchState.VacancyList -> {
+        is VacanciesByMatchState.VacancyList -> {
             VacanciesByMatchScreenContent(
                 modifier = modifier,
                 innerPadding = innerPadding,

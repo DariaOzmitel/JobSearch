@@ -2,10 +2,10 @@ package com.example.ui.screens.vacanciesByMatch
 
 import com.example.ui.models.VacancyCardUI
 
-sealed class VacancyByMatchState {
+sealed class VacanciesByMatchState {
     data class VacancyList(
         val vacancyList: List<VacancyCardUI>,
-    ) : VacancyByMatchState()
+    ) : VacanciesByMatchState()
 
-    object Loading : VacancyByMatchState()
+    object Loading : VacanciesByMatchState()
 }

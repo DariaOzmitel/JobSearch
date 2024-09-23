@@ -9,13 +9,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class VacancyByMatchScreenViewModel(
+class VacanciesByMatchScreenViewModel(
     private val getVacancyListUseCase: GetVacancyListUseCase,
     private val mapper: DomainToUiMapper
 ) : ViewModel() {
-    private val vacancyByMatchStateMutable =
-        MutableStateFlow<VacancyByMatchState>(VacancyByMatchState.Loading)
-    private val vacancyByMatchState: StateFlow<VacancyByMatchState> = vacancyByMatchStateMutable
+    private val vacanciesByMatchStateMutable =
+        MutableStateFlow<VacanciesByMatchState>(VacanciesByMatchState.Loading)
+    private val vacanciesByMatchState: StateFlow<VacanciesByMatchState> =
+        vacanciesByMatchStateMutable
 
     init {
         viewModelScope.launch {
@@ -23,12 +24,12 @@ class VacancyByMatchScreenViewModel(
         }
     }
 
-    fun getVacancyByMatchState(): StateFlow<VacancyByMatchState> = vacancyByMatchState
+    fun getVacancyByMatchState(): StateFlow<VacanciesByMatchState> = vacanciesByMatchState
 
     private fun getVacancyList() {
         viewModelScope.launch {
-            vacancyByMatchStateMutable.update {
-                VacancyByMatchState.VacancyList(
+            vacanciesByMatchStateMutable.update {
+                VacanciesByMatchState.VacancyList(
                     mapper.vacancyToVacancyCardUiList(
                         getVacancyListUseCase.invoke()
                     )
