@@ -14,3 +14,7 @@ internal fun Modifier.ignoreHorizontalParentPadding(horizontal: Dp = 16.dp): Mod
         }
     }
 }
+
+fun Int?.orZero(): Int {
+    return this ?: 0
+}

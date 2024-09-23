@@ -21,4 +21,10 @@
     <string name="search_field_hint">Должность по подходящим вакансиям</string>
     <string name="vacancies_count">%s вакансий</string>
     <string name="by_match">По соответствию</string>
+    <string name="required_experience">Требуемый опыт: %s</string>
+    <string name="response_number">%s человек уже откликнулись</string>
+    <string name="looking_number">%s человека сейчас смотрят</string>
+    <string name="your_tasks">Ваши задачи</string>
+    <string name="ask_the_employer_question">Задайте вопрос работодателю</string>
+    <string name="employer_question_text">Он получит его с откликом на вакансию</string>
 </resources>

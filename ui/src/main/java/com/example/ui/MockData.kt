@@ -2,6 +2,7 @@ package com.example.ui
 
 import com.example.ui.models.OfferUI
 import com.example.ui.models.VacancyCardUI
+import com.example.ui.models.VacancyForScreenUi
 
 val mockRecommendation = OfferUI(
     iconResId = R.drawable.favorites,
@@ -47,3 +48,22 @@ val mockVacanciesList = listOf(
     mockVacancy,
     mockVacancy,
 )
+
+val mockVacancyForScreen = VacancyForScreenUi(
+    lookingNumber = 5,
+    title = "Старший Android разработчик",
+    address = "Москва, ул. Примерная, д. 123",
+    company = "ТехКорп",
+    experience = "3-5 лет",
+    salary = "100,000 руб.",
+    schedules = "Полная занятость",
+    appliedNumber = 20,
+    description = "Увлекательная возможность работать над современными мобильными технологиями.",
+    responsibilities = "Разработка и поддержка Android приложений.",
+    questions = listOf(
+        "Какой график работы?",
+        "Можно ли работать удаленно?",
+        "Какие предоставляются льготы?"
+    )
+)
+
