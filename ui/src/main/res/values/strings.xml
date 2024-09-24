@@ -49,4 +49,8 @@
     <string name="your_tasks">Ваши задачи</string>
     <string name="ask_the_employer_question">Задайте вопрос работодателю</string>
     <string name="employer_question_text">Он получит его с откликом на вакансию</string>
+    <string name="enter_mail">Введите адрес почты</string>
+    <string name="send_code">Отправили код на %s</string>
+    <string name="send_code_text">Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет</string>
+    <string name="confirm">Подтвердить</string>
 </resources>

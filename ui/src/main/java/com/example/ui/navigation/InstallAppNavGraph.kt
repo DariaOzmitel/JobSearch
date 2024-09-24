@@ -8,6 +8,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.ui.R
+import com.example.ui.screens.enterPin.EnterPinScreen
+import com.example.ui.screens.logIn.LogInScreen
 import com.example.ui.screens.main.MainScreen
 import com.example.ui.screens.root.RootScreen
 import com.example.ui.screens.vacanciesByMatch.VacanciesByMatchScreen
@@ -24,6 +26,21 @@ fun InstallAppNavGraph() {
                     navigationState.navigateToVacancy(vacancyId)
                 }) {
                     navigationState.navigateTo(Screen.VacanciesByMatch.route)
+                }
+
+            }
+        },
+        logInScreenContent = {
+            RootScreen(navigationState = navigationState) { innerPadding ->
+                LogInScreen(innerPadding = innerPadding, onButtonClickListener = { mail ->
+                    navigationState.navigateToEnterPin(mail)
+                })
+            }
+        },
+        enterPinScreenContent = {
+            RootScreen(navigationState = navigationState) { innerPadding ->
+                EnterPinScreen(innerPadding = innerPadding) {
+                    navigationState.navigateTo(Screen.Main.route)
                 }
             }
         },

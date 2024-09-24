@@ -19,6 +19,9 @@ class NavigationState(val navHostController: NavHostController) {
     fun navigateToVacancy(vacancyId: String) {
         navHostController.navigate(route = Screen.Vacancy.getRouteWithArgs(vacancyId))
     }
+    fun navigateToEnterPin(mail: String) {
+        navHostController.navigate(route = Screen.EnterPin.getRouteWithArgs(mail))
+    }
 }
 
 @Composable

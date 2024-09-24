@@ -2,8 +2,10 @@ package com.example.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 
 @Composable
 fun AppNavGraph(
@@ -15,11 +17,25 @@ fun AppNavGraph(
     responsesScreenContent: @Composable () -> Unit,
     messagesScreenContent: @Composable () -> Unit,
     profileScreenContent: @Composable () -> Unit,
+    logInScreenContent: @Composable () -> Unit,
+    enterPinScreenContent: @Composable () -> Unit,
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = Screen.Search.route
+        startDestination = Screen.LogIn.route
     ) {
+        composable(Screen.LogIn.route) {
+            logInScreenContent()
+        }
+        composable(route = Screen.EnterPin.route,
+            arguments = listOf(
+                navArgument(name = Screen.KEY_MAIL) {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            enterPinScreenContent()
+        }
         searchNavGraph(
             mainScreenContent = mainScreenContent,
             vacanciesByMatchScreenContent = vacanciesByMatchScreenContent,

@@ -1,6 +1,17 @@
 package com.example.ui.navigation
 
 sealed class Screen(val route: String) {
+
+    object LogIn : Screen(ROUTE_LOG_IN)
+    object EnterPin : Screen(ROUTE_ENTER_PIN) {
+
+        private const val ROUTE_FOR_ARGS = "enter pin"
+
+        fun getRouteWithArgs(mail: String): String {
+            return "$ROUTE_FOR_ARGS/$mail"
+        }
+    }
+
     object Search : Screen(ROUTE_SEARCH)
     object Main : Screen(ROUTE_MAIN)
     object VacanciesByMatch : Screen(ROUTE_VACANCIES_BY_MATCH)
@@ -19,8 +30,11 @@ sealed class Screen(val route: String) {
     object Profile : Screen(ROUTE_PROFILE)
 
     companion object {
-        const val KEY_VACANCY_ID = "community_id"
+        const val KEY_VACANCY_ID = "vacancy_id"
+        const val KEY_MAIL = "mail"
 
+        private const val ROUTE_LOG_IN = "log in"
+        private const val ROUTE_ENTER_PIN = "enter pin/{$KEY_MAIL}"
         private const val ROUTE_SEARCH = "search"
         private const val ROUTE_MAIN = "main"
         private const val ROUTE_VACANCIES_BY_MATCH = "vacancies by match"
