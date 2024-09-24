@@ -19,11 +19,15 @@ fun AppNavGraph(
     profileScreenContent: @Composable () -> Unit,
     logInScreenContent: @Composable () -> Unit,
     enterPinScreenContent: @Composable () -> Unit,
+    splashScreenContent: @Composable () -> Unit,
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = Screen.LogIn.route
+        startDestination = Screen.Splash.route
     ) {
+        composable(Screen.Splash.route) {
+            splashScreenContent()
+        }
         composable(Screen.LogIn.route) {
             logInScreenContent()
         }

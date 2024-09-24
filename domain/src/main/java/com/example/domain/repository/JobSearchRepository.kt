@@ -7,4 +7,6 @@ interface JobSearchRepository {
     suspend fun getVacancyList(): List<Vacancy>
     suspend fun getVacancy(id: String): Vacancy
     suspend fun getOfferList(): List<Offer>
+    suspend fun addUser(mail: String)
+    suspend fun checkAuthorization(): Boolean
 }

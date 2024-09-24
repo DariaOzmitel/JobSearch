@@ -42,7 +42,10 @@ fun EnterPinScreen(
                 innerPadding = innerPadding,
                 pin = state.pin,
                 mail = state.mail,
-                onButtonClickListener = onButtonClickListener
+                onButtonClickListener = {
+                    viewModel.addUser(state.mail)
+                    onButtonClickListener()
+                }
             ) {
                 viewModel.updatePin(it)
             }

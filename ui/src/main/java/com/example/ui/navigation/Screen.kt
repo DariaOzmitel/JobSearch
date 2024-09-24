@@ -2,6 +2,7 @@ package com.example.ui.navigation
 
 sealed class Screen(val route: String) {
 
+    object Splash : Screen(ROUTE_SPLASH)
     object LogIn : Screen(ROUTE_LOG_IN)
     object EnterPin : Screen(ROUTE_ENTER_PIN) {
 
@@ -33,6 +34,7 @@ sealed class Screen(val route: String) {
         const val KEY_VACANCY_ID = "vacancy_id"
         const val KEY_MAIL = "mail"
 
+        private const val ROUTE_SPLASH = "splash"
         private const val ROUTE_LOG_IN = "log in"
         private const val ROUTE_ENTER_PIN = "enter pin/{$KEY_MAIL}"
         private const val ROUTE_SEARCH = "search"

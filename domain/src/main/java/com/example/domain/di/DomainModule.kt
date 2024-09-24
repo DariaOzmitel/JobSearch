@@ -1,5 +1,7 @@
 package com.example.domain.di
 
+import com.example.domain.usecases.AddUserUseCase
+import com.example.domain.usecases.CheckAuthorizationUseCase
 import com.example.domain.usecases.GetOfferListUseCase
 import com.example.domain.usecases.GetVacancyListUseCase
 import com.example.domain.usecases.GetVacancyUseCase
@@ -10,4 +12,6 @@ val domainModule = module {
     factoryOf(::GetVacancyListUseCase)
     factoryOf(::GetOfferListUseCase)
     factoryOf(::GetVacancyUseCase)
+    factoryOf(::AddUserUseCase)
+    factoryOf(::CheckAuthorizationUseCase)
 }

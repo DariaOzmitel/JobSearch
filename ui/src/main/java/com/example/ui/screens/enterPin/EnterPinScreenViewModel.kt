@@ -2,13 +2,17 @@ package com.example.ui.screens.enterPin
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.domain.usecases.AddUserUseCase
 import com.example.ui.navigation.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class EnterPinScreenViewModel(
     private val savedStateHandle: SavedStateHandle,
+    private val addUserUseCase: AddUserUseCase
 ) : ViewModel() {
     private val enterPinStateMutable =
         MutableStateFlow<EnterPinState>(EnterPinState.Loading)
@@ -35,6 +39,11 @@ class EnterPinScreenViewModel(
 
                 EnterPinState.Loading -> state
             }
+        }
+    }
+    fun addUser(mail: String) {
+        viewModelScope.launch {
+            addUserUseCase.invoke(mail)
         }
     }
 }

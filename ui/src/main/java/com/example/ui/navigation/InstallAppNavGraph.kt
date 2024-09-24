@@ -12,6 +12,7 @@ import com.example.ui.screens.enterPin.EnterPinScreen
 import com.example.ui.screens.logIn.LogInScreen
 import com.example.ui.screens.main.MainScreen
 import com.example.ui.screens.root.RootScreen
+import com.example.ui.screens.splash.SplashScreen
 import com.example.ui.screens.vacanciesByMatch.VacanciesByMatchScreen
 import com.example.ui.screens.vacancy.VacancyScreen
 
@@ -20,6 +21,14 @@ fun InstallAppNavGraph() {
     val navigationState = rememberNavigationState()
     AppNavGraph(
         navHostController = navigationState.navHostController,
+        splashScreenContent = {
+            SplashScreen { authorizationStatus ->
+                when (authorizationStatus) {
+                    true -> navigationState.navigateTo(Screen.Main.route)
+                    false -> navigationState.navigateTo(Screen.LogIn.route)
+                }
+            }
+        },
         mainScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
                 MainScreen(innerPadding = innerPadding, onCardClickListener = { vacancyId ->

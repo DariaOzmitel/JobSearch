@@ -7,9 +7,9 @@ import androidx.room.Query
 
 @Dao
 interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.NONE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addUser(userDbModel: UserDbModel)
 
-    @Query("SELECT * FROM UserDbModel WHERE mail=:mail")
-    suspend fun getUser(mail: String): UserDbModel?
+    @Query("SELECT * FROM UserDbModel LIMIT 1")
+    suspend fun checkAuthorization(): UserDbModel?
 }
