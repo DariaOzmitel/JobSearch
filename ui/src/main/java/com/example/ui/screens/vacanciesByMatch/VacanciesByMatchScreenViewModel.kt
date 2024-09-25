@@ -35,7 +35,7 @@ class VacanciesByMatchScreenViewModel(
         }
     }
 
-    private fun getVacancyList() {
+    fun getVacancyList() {
         viewModelScope.launch {
             vacanciesByMatchStateMutable.update {
                 VacanciesByMatchState.VacancyList(

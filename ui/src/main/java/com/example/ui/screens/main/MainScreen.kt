@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -51,6 +52,10 @@ fun MainScreen(
             ProgressIndicator()
 
         is MainState.VacancyList -> {
+            LaunchedEffect(Unit) {
+                viewModel.getVacancyList()
+            }
+
             MainScreenContent(
                 modifier = modifier,
                 innerPadding = innerPadding,

@@ -25,8 +25,16 @@ fun InstallAppNavGraph() {
         splashScreenContent = {
             SplashScreen { authorizationStatus ->
                 when (authorizationStatus) {
-                    true -> navigationState.navigateTo(Screen.Main.route)
-                    false -> navigationState.navigateTo(Screen.LogIn.route)
+                    true -> navigationState.navigateTo(
+                        route = Screen.Main.route,
+                        inclusive = true,
+                        popUpToScreen = Screen.Splash.route
+                    )
+
+                    false -> navigationState.navigateTo(
+                        route = Screen.LogIn.route, inclusive = true,
+                        popUpToScreen = Screen.Splash.route
+                    )
                 }
             }
         },
@@ -50,7 +58,11 @@ fun InstallAppNavGraph() {
         enterPinScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
                 EnterPinScreen(innerPadding = innerPadding) {
-                    navigationState.navigateTo(Screen.Main.route)
+                    navigationState.navigateTo(
+                        route = Screen.Main.route,
+                        inclusive = true,
+                        popUpToScreen = Screen.EnterPin.route
+                    )
                 }
             }
         },
@@ -59,7 +71,10 @@ fun InstallAppNavGraph() {
                 FavoriteScreen(
                     innerPadding = innerPadding,
                     onButtonClickListener = {}) { vacancyId ->
-                    navigationState.navigateToVacancy(vacancyId)
+                    navigationState.navigateToVacancy(
+                        vacancyId = vacancyId,
+                        popUpToScreen = Screen.Favorites.route
+                    )
                 }
             }
         },
@@ -105,7 +120,10 @@ fun InstallAppNavGraph() {
         vacanciesByMatchScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
                 VacanciesByMatchScreen(innerPadding = innerPadding) { vacancyId ->
-                    navigationState.navigateToVacancy(vacancyId)
+                    navigationState.navigateToVacancy(
+                        vacancyId = vacancyId,
+                        popUpToScreen = Screen.VacanciesByMatch.route
+                    )
                 }
             }
         },

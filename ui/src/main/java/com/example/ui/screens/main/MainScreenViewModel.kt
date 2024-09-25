@@ -36,7 +36,7 @@ class MainScreenViewModel(
         }
     }
 
-    private fun getVacancyList() {
+    fun getVacancyList() {
         viewModelScope.launch {
             mainStateMutable.update {
                 MainState.VacancyList(
