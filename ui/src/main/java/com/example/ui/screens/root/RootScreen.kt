@@ -11,7 +11,7 @@ import com.example.ui.navigation.NavigationState
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-fun RootScreen(
+internal fun RootScreen(
     modifier: Modifier = Modifier,
     navigationState: NavigationState,
     content: @Composable (PaddingValues) -> Unit

@@ -32,6 +32,23 @@ private const val MAX_TITLE_LINES_WITHOUT_BUTTON = 3
 private const val MAX_BUTTON_TEXT_LINES = 1
 
 @Composable
+internal fun RecommendationBlock(
+    modifier: Modifier = Modifier,
+    recommendationList: List<OfferUI>
+) {
+    LazyRow(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp)
+    ) {
+        items(recommendationList) {
+            RecommendationCard(recommendation = it) {
+            }
+        }
+    }
+}
+
+@Composable
 private fun RecommendationCard(
     modifier: Modifier = Modifier,
     recommendation: OfferUI,
@@ -72,23 +89,6 @@ private fun RecommendationCard(
                     color = JobSearchTheme.colors.specialGreen,
                     maxLines = MAX_BUTTON_TEXT_LINES
                 )
-            }
-        }
-    }
-}
-
-@Composable
-internal fun RecommendationBlock(
-    modifier: Modifier = Modifier,
-    recommendationList: List<OfferUI>
-) {
-    LazyRow(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        contentPadding = PaddingValues(horizontal = 16.dp)
-    ) {
-        items(recommendationList) {
-            RecommendationCard(recommendation = it) {
             }
         }
     }

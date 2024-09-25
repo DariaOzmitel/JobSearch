@@ -1,6 +1,6 @@
 package com.example.ui.models
 
-data class VacancyForScreenUi(
+internal data class VacancyForScreenUi(
     val id: String,
     val isFavorite: Boolean = false,
     val lookingNumber: Int?,

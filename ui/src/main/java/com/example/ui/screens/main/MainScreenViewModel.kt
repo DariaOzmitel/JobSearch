@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainScreenViewModel(
+internal class MainScreenViewModel(
     private val getVacancyListUseCase: GetVacancyListUseCase,
     private val getOfferListUseCase: GetOfferListUseCase,
     private val changeFavoriteStatusUseCase: ChangeFavoriteStatusUseCase,

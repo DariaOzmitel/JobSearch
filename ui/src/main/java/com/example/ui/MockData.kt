@@ -4,12 +4,12 @@ import com.example.ui.models.OfferUI
 import com.example.ui.models.VacancyCardUI
 import com.example.ui.models.VacancyForScreenUi
 
-val mockRecommendation = OfferUI(
+internal val mockRecommendation = OfferUI(
     iconResId = R.drawable.favorites,
     title = "Временная работа или подработка",
     buttonText = "Полезные статьи и советы"
 )
-val mockRecommendationList = listOf(
+internal val mockRecommendationList = listOf(
     OfferUI(
         iconResId = R.drawable.favorites,
         title = "Временная работа или подработка",
@@ -31,7 +31,7 @@ val mockRecommendationList = listOf(
     )
 )
 
-val mockVacancy = VacancyCardUI(
+internal val mockVacancy = VacancyCardUI(
     id = "1",
     lookingNumber = 2,
     title = "UI/UX дизайнер",
@@ -41,7 +41,7 @@ val mockVacancy = VacancyCardUI(
     publishedDate = "20 февраля"
 )
 
-val mockVacanciesList = listOf(
+internal val mockVacanciesList = listOf(
     mockVacancy,
     mockVacancy,
     mockVacancy,
@@ -50,7 +50,7 @@ val mockVacanciesList = listOf(
     mockVacancy,
 )
 
-val mockVacancyForScreen = VacancyForScreenUi(
+internal val mockVacancyForScreen = VacancyForScreenUi(
     id = "gjh",
     lookingNumber = 5,
     title = "Старший Android разработчик",

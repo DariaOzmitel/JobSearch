@@ -15,20 +15,6 @@ import com.example.ui.mockVacancyForScreen
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-private fun QuestionBox(
-    modifier: Modifier = Modifier,
-    question: String
-) {
-    Box(
-        modifier = modifier
-            .background(JobSearchTheme.colors.basicGrey2, shape = RoundedCornerShape(50.dp))
-            .padding(vertical = 8.dp, horizontal = 12.dp)
-    ) {
-        TextTitle4(text = question, color = JobSearchTheme.colors.basicWhite)
-    }
-}
-
-@Composable
 internal fun QuestionBoxColumn(
     modifier: Modifier = Modifier,
     questionList: List<String>?
@@ -40,7 +26,20 @@ internal fun QuestionBoxColumn(
             }
         }
     }
+}
 
+@Composable
+private fun QuestionBox(
+    modifier: Modifier = Modifier,
+    question: String
+) {
+    Box(
+        modifier = modifier
+            .background(JobSearchTheme.colors.basicGrey2, shape = RoundedCornerShape(50.dp))
+            .padding(vertical = 8.dp, horizontal = 12.dp)
+    ) {
+        TextTitle4(text = question, color = JobSearchTheme.colors.basicWhite)
+    }
 }
 
 @Preview

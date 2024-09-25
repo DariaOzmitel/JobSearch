@@ -25,7 +25,7 @@ import com.example.ui.theme.JobSearchTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun EnterPinScreen(
+internal fun EnterPinScreen(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     onButtonClickListener: () -> Unit,
@@ -54,7 +54,7 @@ fun EnterPinScreen(
 }
 
 @Composable
-fun EnterPinScreenContent(
+private fun EnterPinScreenContent(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     pin: String,

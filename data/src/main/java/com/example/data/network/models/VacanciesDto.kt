@@ -1,22 +1,22 @@
 package com.example.data.network.models
 
-data class AddressDto(
+internal data class AddressDto(
     val town: String,
     val street: String,
     val house: String
 )
 
-data class ExperienceDto(
+internal data class ExperienceDto(
     val previewText: String,
     val text: String
 )
 
-data class SalaryDto(
+internal data class SalaryDto(
     val short: String? = null,
     val full: String
 )
 
-data class VacancyDto(
+internal data class VacancyDto(
     val id: String,
     val lookingNumber: Int?,
     val title: String,
@@ -33,6 +33,6 @@ data class VacancyDto(
     val questions: List<String>
 )
 
-data class VacanciesDto(
+internal data class VacanciesDto(
     val vacancies: List<VacancyDto>
 )

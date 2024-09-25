@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class FavoriteScreenViewModel(
+internal class FavoriteScreenViewModel(
     private val getVacancyListUseCase: GetVacancyListUseCase,
     private val changeFavoriteStatusUseCase: ChangeFavoriteStatusUseCase,
     private val getFavoriteVacanciesListUseCase: GetFavoriteVacanciesListUseCase,

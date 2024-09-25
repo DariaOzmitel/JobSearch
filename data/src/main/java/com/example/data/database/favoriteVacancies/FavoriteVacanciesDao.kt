@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface FavoriteVacanciesDao {
+internal interface FavoriteVacanciesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFavoriteVacancy(favoriteVacanciesDbModel: FavoriteVacanciesDbModel)
 

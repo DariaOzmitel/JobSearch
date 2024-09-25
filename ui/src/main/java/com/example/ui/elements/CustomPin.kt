@@ -27,7 +27,7 @@ import com.example.ui.theme.JobSearchTheme
 const val PIN_LENGTH = 4
 
 @Composable
-fun CustomPin(
+internal fun CustomPin(
     modifier: Modifier = Modifier,
     displayText: String,
     onValueChangeListener: (String) -> Unit,
@@ -53,7 +53,11 @@ fun CustomPin(
 }
 
 @Composable
-fun PinString(inputText: String, isFocused: Boolean, correctPinEnteredListener: () -> Unit = {}) {
+private fun PinString(
+    inputText: String,
+    isFocused: Boolean,
+    correctPinEnteredListener: () -> Unit = {}
+) {
     val inputTextLength = inputText.length
     val correctPinEntered = inputTextLength == PIN_LENGTH
     Row(
@@ -102,6 +106,6 @@ fun PinString(inputText: String, isFocused: Boolean, correctPinEnteredListener: 
 
 @Preview
 @Composable
-fun CustomPinPreview() {
+private fun CustomPinPreview() {
     CustomPin(displayText = "", onValueChangeListener = {})
 }

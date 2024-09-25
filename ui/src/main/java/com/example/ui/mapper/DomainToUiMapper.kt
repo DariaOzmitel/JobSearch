@@ -9,46 +9,12 @@ import com.example.ui.models.VacancyForScreenUi
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class DomainToUiMapper {
-
-    fun formatDate(inputDate: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ru"))
-        val outputFormat = SimpleDateFormat("d MMMM", Locale("ru"))
-
-        val date = inputFormat.parse(inputDate)
-        return outputFormat.format(date!!)
-    }
-
-    fun vacancyToVacancyCardUi(vacancy: Vacancy) = vacancy.run {
-        VacancyCardUI(
-            id = id,
-            lookingNumber = lookingNumber,
-            title = title,
-            town = address.town,
-            company = company,
-            experienceText = experiencePreviewText,
-            publishedDate = formatDate(publishedDate),
-            isFavorite = isFavorite
-        )
-    }
+internal class DomainToUiMapper {
 
     fun vacancyToVacancyCardUiList(
         vacancyList: List<Vacancy>,
     ) =
         vacancyList.map { vacancyToVacancyCardUi(it) }
-
-    fun offerToOfferUi(offer: Offer) = offer.run {
-        OfferUI(
-            iconResId = when (id) {
-                "near_vacancies" -> R.drawable.offer_blue
-                "level_up_resume" -> R.drawable.offer_star
-                "temporary_job" -> R.drawable.offer_document
-                else -> null
-            },
-            title = title.trim(),
-            buttonText = buttonText
-        )
-    }
 
     fun offerToOfferCardUiList(offerList: List<Offer>) =
         offerList.map { offerToOfferUi(it) }
@@ -68,6 +34,40 @@ class DomainToUiMapper {
             description = description,
             responsibilities = responsibilities,
             questions = questions,
+        )
+    }
+
+    private fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ru"))
+        val outputFormat = SimpleDateFormat("d MMMM", Locale("ru"))
+
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date!!)
+    }
+
+    private fun vacancyToVacancyCardUi(vacancy: Vacancy) = vacancy.run {
+        VacancyCardUI(
+            id = id,
+            lookingNumber = lookingNumber,
+            title = title,
+            town = address.town,
+            company = company,
+            experienceText = experiencePreviewText,
+            publishedDate = formatDate(publishedDate),
+            isFavorite = isFavorite
+        )
+    }
+
+    private fun offerToOfferUi(offer: Offer) = offer.run {
+        OfferUI(
+            iconResId = when (id) {
+                "near_vacancies" -> R.drawable.offer_blue
+                "level_up_resume" -> R.drawable.offer_star
+                "temporary_job" -> R.drawable.offer_document
+                else -> null
+            },
+            title = title.trim(),
+            buttonText = buttonText
         )
     }
 }

@@ -10,7 +10,7 @@ import com.example.domain.models.Offer
 import com.example.domain.models.Vacancy
 import com.example.domain.repository.JobSearchRepository
 
-class JobSearchRepositoryImpl(
+internal class JobSearchRepositoryImpl(
     private val apiService: ApiService,
     private val mapper: DtoToEntityMapper,
     private val userDao: UserDao,

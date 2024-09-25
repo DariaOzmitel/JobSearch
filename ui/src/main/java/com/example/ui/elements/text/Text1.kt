@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-fun Text1(
+internal fun Text1(
     modifier: Modifier = Modifier,
     text: String,
     color: Color = Color.Unspecified,

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class UserDbModel(
+internal data class UserDbModel(
     @PrimaryKey(autoGenerate = false)
     val mail: String,
 )

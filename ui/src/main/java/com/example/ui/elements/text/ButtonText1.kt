@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-fun ButtonText1(
+internal fun ButtonText1(
     modifier: Modifier = Modifier,
     text: String,
     color: Color = Color.Unspecified,

@@ -1,6 +1,6 @@
 package com.example.ui.navigation
 
-sealed class Screen(val route: String) {
+internal sealed class Screen(val route: String) {
 
     object Splash : Screen(ROUTE_SPLASH)
     object LogIn : Screen(ROUTE_LOG_IN)

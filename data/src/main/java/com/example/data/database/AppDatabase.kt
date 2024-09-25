@@ -14,7 +14,7 @@ import com.example.data.database.user.UserDbModel
     version = 9,
     exportSchema = false
 )
-abstract class AppDatabase : RoomDatabase() {
+internal abstract class AppDatabase : RoomDatabase() {
     companion object {
 
         private var db: AppDatabase? = null

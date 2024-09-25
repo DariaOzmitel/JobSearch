@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class VacanciesByMatchScreenViewModel(
+internal class VacanciesByMatchScreenViewModel(
     private val getVacancyListUseCase: GetVacancyListUseCase,
     private val changeFavoriteStatusUseCase: ChangeFavoriteStatusUseCase,
     private val mapper: DomainToUiMapper

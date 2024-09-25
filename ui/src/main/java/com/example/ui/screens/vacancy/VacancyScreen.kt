@@ -35,7 +35,7 @@ import com.example.ui.theme.JobSearchTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun VacancyScreen(
+internal fun VacancyScreen(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     onArrowClickListener: () -> Unit
@@ -60,7 +60,7 @@ fun VacancyScreen(
 }
 
 @Composable
-fun VacancyScreenContent(
+private fun VacancyScreenContent(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     vacancy: VacancyForScreenUi,

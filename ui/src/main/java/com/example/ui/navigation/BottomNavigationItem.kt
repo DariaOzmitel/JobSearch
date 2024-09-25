@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.ui.R
 
-enum class BottomNavigationItem(
+internal enum class BottomNavigationItem(
     val screen: Screen,
     @DrawableRes val iconResId: Int,
     @StringRes val titleResId: Int

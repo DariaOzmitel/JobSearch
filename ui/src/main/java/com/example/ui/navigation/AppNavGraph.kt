@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 
 @Composable
-fun AppNavGraph(
+internal fun AppNavGraph(
     navHostController: NavHostController,
     mainScreenContent: @Composable () -> Unit,
     vacanciesByMatchScreenContent: @Composable () -> Unit,

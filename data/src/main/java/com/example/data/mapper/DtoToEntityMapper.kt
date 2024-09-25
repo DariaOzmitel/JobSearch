@@ -6,8 +6,19 @@ import com.example.domain.models.Address
 import com.example.domain.models.Offer
 import com.example.domain.models.Vacancy
 
-class DtoToEntityMapper {
-    fun mapVacancyDtoToEntity(dto: VacancyDto, favoriteVacanciesId: List<String>? = null) =
+internal class DtoToEntityMapper {
+    fun mapOfferDtoListToEntityList(dtoList: List<OfferDto>?) = dtoList?.map {
+        mapOfferDtoToEntity(it)
+    }
+
+    fun mapVacancyDtoListToEntityList(
+        dtoList: List<VacancyDto>?,
+        favoriteVacanciesId: List<String>? = emptyList()
+    ) = dtoList?.map {
+        mapVacancyDtoToEntity(it, favoriteVacanciesId)
+    }
+
+    private fun mapVacancyDtoToEntity(dto: VacancyDto, favoriteVacanciesId: List<String>? = null) =
         dto.run {
             Vacancy(
                 id = id,
@@ -32,14 +43,7 @@ class DtoToEntityMapper {
             )
         }
 
-    fun mapVacancyDtoListToEntityList(
-        dtoList: List<VacancyDto>?,
-        favoriteVacanciesId: List<String>? = emptyList()
-    ) = dtoList?.map {
-        mapVacancyDtoToEntity(it, favoriteVacanciesId)
-    }
-
-    fun mapOfferDtoToEntity(dto: OfferDto) =
+    private fun mapOfferDtoToEntity(dto: OfferDto) =
         dto.run {
             Offer(
                 id = id,
@@ -48,8 +52,4 @@ class DtoToEntityMapper {
                 buttonText = button?.text
             )
         }
-
-    fun mapOfferDtoListToEntityList(dtoList: List<OfferDto>?) = dtoList?.map {
-        mapOfferDtoToEntity(it)
-    }
 }

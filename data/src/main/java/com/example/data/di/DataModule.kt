@@ -21,10 +21,10 @@ val dataModule = module {
     singleOf(::DtoToEntityMapper)
 }
 
-fun provideUserDao(application: Application): UserDao {
+private fun provideUserDao(application: Application): UserDao {
     return AppDatabase.getInstance(application).userDao()
 }
 
-fun provideFavoriteVacanciesDao(application: Application): FavoriteVacanciesDao {
+private fun provideFavoriteVacanciesDao(application: Application): FavoriteVacanciesDao {
     return AppDatabase.getInstance(application).favoriteVacanciesDao()
 }

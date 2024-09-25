@@ -13,9 +13,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             JobSearchTheme {
-//                UiKitScreen()
-//                UiKitMoleculesScreen()
-//                LogInScreen()
                 InstallAppNavGraph()
             }
         }

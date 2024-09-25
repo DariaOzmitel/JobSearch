@@ -1,6 +1,6 @@
 package com.example.ui.models
 
-data class VacancyCardUI(
+internal data class VacancyCardUI(
     val id: String,
     val lookingNumber: Int? = null,
     val title: String,

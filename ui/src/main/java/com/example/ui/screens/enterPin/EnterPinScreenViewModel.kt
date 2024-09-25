@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class EnterPinScreenViewModel(
+internal class EnterPinScreenViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val addUserUseCase: AddUserUseCase
 ) : ViewModel() {
@@ -24,12 +24,6 @@ class EnterPinScreenViewModel(
 
     fun getEnterPinState(): StateFlow<EnterPinState> = enterPinState
 
-    private fun getMailId() {
-        val mail = savedStateHandle.get<String>(Screen.KEY_MAIL)
-            ?: throw NoSuchElementException("Mail not found")
-        enterPinStateMutable.update { EnterPinState.EnterPin(mail = mail, pin = "") }
-    }
-
     fun updatePin(pin: String) {
         enterPinStateMutable.update { state ->
             when (state) {
@@ -41,9 +35,16 @@ class EnterPinScreenViewModel(
             }
         }
     }
+
     fun addUser(mail: String) {
         viewModelScope.launch {
             addUserUseCase.invoke(mail)
         }
+    }
+
+    private fun getMailId() {
+        val mail = savedStateHandle.get<String>(Screen.KEY_MAIL)
+            ?: throw NoSuchElementException("Mail not found")
+        enterPinStateMutable.update { EnterPinState.EnterPin(mail = mail, pin = "") }
     }
 }

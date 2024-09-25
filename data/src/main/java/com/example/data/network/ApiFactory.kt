@@ -3,7 +3,7 @@ package com.example.data.network
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object ApiFactory {
+internal object ApiFactory {
 
     private const val BASE_URL =
         "https://gist.githubusercontent.com/DariaOzmitel/b7f6c0916c4e0a52b42ba4c0dd23fbd7/raw/"

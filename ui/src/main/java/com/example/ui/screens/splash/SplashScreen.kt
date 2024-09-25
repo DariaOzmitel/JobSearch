@@ -19,7 +19,7 @@ import org.koin.androidx.compose.koinViewModel
 private const val ANIMATION_SPEED = 2.0f
 
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier, animationEndListener: (Boolean) -> Unit) {
+internal fun SplashScreen(modifier: Modifier = Modifier, animationEndListener: (Boolean) -> Unit) {
     val viewModel: SplashScreenViewModel = koinViewModel()
     val authorizationStatus by viewModel.getStatusFlow().collectAsStateWithLifecycle()
     Box(

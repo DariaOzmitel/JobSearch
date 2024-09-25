@@ -31,7 +31,7 @@ import com.example.ui.theme.JobSearchTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun VacanciesByMatchScreen(
+internal fun VacanciesByMatchScreen(
     modifier: Modifier = Modifier, innerPadding: PaddingValues,
     onCardClickListener: (String) -> Unit,
 ) {

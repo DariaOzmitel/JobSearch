@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.TextUnit
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-fun TextTitle3(
+internal fun TextTitle3(
     modifier: Modifier = Modifier,
     text: String,
     color: Color = Color.Unspecified,

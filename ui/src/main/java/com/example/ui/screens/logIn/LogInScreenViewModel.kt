@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class LogInScreenViewModel(
+internal class LogInScreenViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val getVacancyUseCase: GetVacancyUseCase,
     private val mapper: DomainToUiMapper

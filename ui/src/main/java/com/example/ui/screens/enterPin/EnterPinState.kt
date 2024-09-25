@@ -1,6 +1,6 @@
 package com.example.ui.screens.enterPin
 
-sealed class EnterPinState {
+internal sealed class EnterPinState {
     data class EnterPin(
         val mail: String,
         val pin: String,

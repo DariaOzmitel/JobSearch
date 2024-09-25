@@ -37,7 +37,7 @@ import org.koin.androidx.compose.koinViewModel
 private const val MAX_VISIBLE_VACANCIES_CARD = 3
 
 @Composable
-fun MainScreen(
+internal fun MainScreen(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     onCardClickListener: (String) -> Unit,

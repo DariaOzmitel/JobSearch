@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navigation
 
-fun NavGraphBuilder.searchNavGraph(
+internal fun NavGraphBuilder.searchNavGraph(
     mainScreenContent: @Composable () -> Unit,
     vacanciesByMatchScreenContent: @Composable () -> Unit,
     vacancyScreenContent: @Composable () -> Unit,

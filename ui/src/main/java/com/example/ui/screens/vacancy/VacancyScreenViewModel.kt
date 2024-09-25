@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class VacancyScreenViewModel(
+internal class VacancyScreenViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val getVacancyUseCase: GetVacancyUseCase,
     private val changeFavoriteStatusUseCase: ChangeFavoriteStatusUseCase,
@@ -30,11 +30,6 @@ class VacancyScreenViewModel(
 
     fun getVacancyState(): StateFlow<VacancyState> = vacancyState
 
-    private fun getVacancyId(): String {
-        return savedStateHandle.get<String>(Screen.KEY_VACANCY_ID)
-            ?: throw NoSuchElementException("Vacancy not found")
-    }
-
     fun changeFavoriteStatus(vacancyId: String) {
         viewModelScope.launch {
             changeFavoriteStatusUseCase.invoke(vacancyId)
@@ -50,6 +45,11 @@ class VacancyScreenViewModel(
                 }
             }
         }
+    }
+
+    private fun getVacancyId(): String {
+        return savedStateHandle.get<String>(Screen.KEY_VACANCY_ID)
+            ?: throw NoSuchElementException("Vacancy not found")
     }
 
     private fun getVacancy() {

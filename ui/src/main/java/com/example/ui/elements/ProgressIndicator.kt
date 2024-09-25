@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 import com.example.ui.theme.JobSearchTheme
 
 @Composable
-fun ProgressIndicator(
+internal fun ProgressIndicator(
     modifier: Modifier = Modifier,
     contentModifier: Modifier = Modifier.size(100.dp),
     color: Color = JobSearchTheme.colors.specialBlue

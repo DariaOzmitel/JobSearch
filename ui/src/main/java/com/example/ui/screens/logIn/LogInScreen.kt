@@ -19,7 +19,7 @@ import com.example.ui.theme.JobSearchTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun LogInScreen(
+internal fun LogInScreen(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     onButtonClickListener: (String) -> Unit,
@@ -36,7 +36,7 @@ fun LogInScreen(
 }
 
 @Composable
-fun LogInScreenContent(
+private fun LogInScreenContent(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     mail: String,
