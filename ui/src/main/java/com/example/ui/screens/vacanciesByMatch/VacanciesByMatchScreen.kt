@@ -46,7 +46,8 @@ fun VacanciesByMatchScreen(
                 modifier = modifier,
                 innerPadding = innerPadding,
                 vacancyList = state.vacancyList,
-                onCardClickListener = onCardClickListener
+                onCardClickListener = onCardClickListener,
+                onImageClickListener = { viewModel.changeFavoriteStatus(it) }
             )
         }
     }
@@ -57,6 +58,7 @@ private fun VacanciesByMatchScreenContent(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
     vacancyList: List<VacancyCardUI>,
+    onImageClickListener: (String) -> Unit,
     onCardClickListener: (String) -> Unit,
 ) {
     var displayText by rememberSaveable {
@@ -109,9 +111,14 @@ private fun VacanciesByMatchScreenContent(
                 Image(painter = painterResource(id = R.drawable.filter), contentDescription = "")
             }
         }
-        items(vacancyList) {
-            VacancyCard(modifier = Modifier.padding(bottom = 16.dp), vacancy = it) {
-                onCardClickListener(it.id)
+        items(vacancyList) { vacancy ->
+            VacancyCard(
+                modifier = Modifier.padding(bottom = 16.dp),
+                vacancy = vacancy,
+                isFavourite = vacancy.isFavorite,
+                onImageClickListener = { onImageClickListener(vacancy.id) }
+            ) {
+                onCardClickListener(vacancy.id)
             }
         }
     }
@@ -122,6 +129,7 @@ private fun VacanciesByMatchScreenContent(
 private fun VacanciesByMatchScreenPreview() {
     VacanciesByMatchScreenContent(
         innerPadding = PaddingValues(0.dp),
-        vacancyList = mockVacanciesList
+        vacancyList = mockVacanciesList,
+        onImageClickListener = {}
     ) {}
 }

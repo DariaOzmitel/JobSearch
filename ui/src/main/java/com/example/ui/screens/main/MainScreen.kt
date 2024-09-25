@@ -56,7 +56,8 @@ fun MainScreen(
                 innerPadding = innerPadding,
                 vacancyList = state.vacancyList,
                 offerList = state.offerList,
-                onCardClickListener = onCardClickListener
+                onCardClickListener = onCardClickListener,
+                onImageClickListener = { viewModel.changeFavoriteStatus(it) }
             ) {
                 onButtonClickListener()
             }
@@ -71,6 +72,7 @@ private fun MainScreenContent(
     vacancyList: List<VacancyCardUI>,
     offerList: List<OfferUI>,
     onCardClickListener: (String) -> Unit,
+    onImageClickListener: (String) -> Unit,
     onButtonClickListener: () -> Unit,
 ) {
     val invisibleVacanciesCount = vacancyList.size - MAX_VISIBLE_VACANCIES_CARD
@@ -119,9 +121,14 @@ private fun MainScreenContent(
                 color = JobSearchTheme.colors.basicWhite
             )
         }
-        items(vacancyList.take(MAX_VISIBLE_VACANCIES_CARD)) {
-            VacancyCard(modifier = Modifier.padding(bottom = 16.dp), vacancy = it) {
-                onCardClickListener(it.id)
+        items(vacancyList.take(MAX_VISIBLE_VACANCIES_CARD)) { vacancy ->
+            VacancyCard(
+                modifier = Modifier.padding(bottom = 16.dp),
+                vacancy = vacancy,
+                isFavourite = vacancy.isFavorite,
+                onImageClickListener = { onImageClickListener(vacancy.id) }
+            ) {
+                onCardClickListener(vacancy.id)
             }
         }
         if (invisibleVacanciesCount > 0) {
@@ -146,6 +153,7 @@ private fun MainScreenPreview() {
         innerPadding = PaddingValues(0.dp),
         vacancyList = mockVacanciesList,
         offerList = mockRecommendationList,
-        onCardClickListener = {}
+        onCardClickListener = {},
+        onImageClickListener = {}
     ) {}
 }

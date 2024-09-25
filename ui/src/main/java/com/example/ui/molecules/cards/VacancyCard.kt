@@ -30,6 +30,8 @@ import com.example.ui.theme.JobSearchTheme
 internal fun VacancyCard(
     modifier: Modifier = Modifier,
     vacancy: VacancyCardUI,
+    isFavourite: Boolean = false,
+    onImageClickListener: () -> Unit,
     onCardClickListener: () -> Unit
 ) {
     Box(
@@ -41,8 +43,18 @@ internal fun VacancyCard(
         contentAlignment = Alignment.TopEnd
     ) {
         Image(
-            modifier = Modifier.clickable { },
-            painter = painterResource(id = R.drawable.heart),
+            modifier = Modifier
+                .size(24.dp)
+                .clickable { onImageClickListener() },
+            painter = when (isFavourite) {
+                true -> {
+                    painterResource(id = R.drawable.heart)
+                }
+
+                false -> {
+                    painterResource(id = R.drawable.favorites)
+                }
+            },
             contentDescription = ""
         )
         Column {
@@ -106,5 +118,5 @@ internal fun VacancyCard(
 @Preview
 @Composable
 private fun VacancyCardPreview() {
-    VacancyCard(vacancy = mockVacancy) {}
+    VacancyCard(vacancy = mockVacancy, onImageClickListener = {}) {}
 }

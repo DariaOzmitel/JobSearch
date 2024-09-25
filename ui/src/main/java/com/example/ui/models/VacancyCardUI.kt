@@ -8,6 +8,7 @@ data class VacancyCardUI(
     val company: String,
     val experienceText: String,
     val publishedDate: String,
+    val isFavorite: Boolean = false
 )
 
 

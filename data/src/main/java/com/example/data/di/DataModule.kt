@@ -2,6 +2,7 @@ package com.example.data.di
 
 import android.app.Application
 import com.example.data.database.AppDatabase
+import com.example.data.database.favoriteVacancies.FavoriteVacanciesDao
 import com.example.data.database.user.UserDao
 import com.example.data.mapper.DtoToEntityMapper
 import com.example.data.network.ApiFactory
@@ -15,10 +16,15 @@ import org.koin.dsl.module
 val dataModule = module {
     singleOf(::JobSearchRepositoryImpl) bind JobSearchRepository::class
     single<ApiService> { ApiFactory.apiService }
-    single { provideUserInfoDao(get()) }
+    singleOf(::provideUserDao)
+    singleOf(::provideFavoriteVacanciesDao)
     singleOf(::DtoToEntityMapper)
 }
 
-fun provideUserInfoDao(application: Application): UserDao {
+fun provideUserDao(application: Application): UserDao {
     return AppDatabase.getInstance(application).userDao()
+}
+
+fun provideFavoriteVacanciesDao(application: Application): FavoriteVacanciesDao {
+    return AppDatabase.getInstance(application).favoriteVacanciesDao()
 }

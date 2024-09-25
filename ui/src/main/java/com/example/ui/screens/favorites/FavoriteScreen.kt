@@ -3,7 +3,6 @@ package com.example.ui.screens.favorites
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -15,7 +14,6 @@ import com.example.ui.elements.text.Text1
 import com.example.ui.elements.text.TextTitle2
 import com.example.ui.mockVacanciesList
 import com.example.ui.models.VacancyCardUI
-import com.example.ui.molecules.cards.VacancyCard
 import com.example.ui.orZero
 import com.example.ui.theme.JobSearchTheme
 
@@ -84,13 +82,13 @@ private fun FavoriteScreenContent(
                 color = JobSearchTheme.colors.basicGrey3
             )
         }
-        vacancyList?.let {
-            items(vacancyList) {
-                VacancyCard(modifier = Modifier.padding(bottom = 16.dp), vacancy = it) {
-                    onCardClickListener(it.id)
-                }
-            }
-        }
+//        vacancyList?.let {
+//            items(vacancyList) {
+//                VacancyCard(modifier = Modifier.padding(bottom = 16.dp), vacancy = it) {
+//                    onCardClickListener(it.id)
+//                }
+//            }
+//        }
     }
 }
 

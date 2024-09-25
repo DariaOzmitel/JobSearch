@@ -9,7 +9,7 @@ import com.example.ui.models.VacancyForScreenUi
 import java.util.Locale
 
 class DomainToUiMapper {
-    fun vacancyToVacancyCardUi(vacancy: Vacancy) = vacancy.run {
+    fun vacancyToVacancyCardUi(vacancy: Vacancy, favoriteVacanciesId: List<String>?) = vacancy.run {
         VacancyCardUI(
             id = id,
             lookingNumber = lookingNumber,
@@ -17,12 +17,16 @@ class DomainToUiMapper {
             town = address.town,
             company = company,
             experienceText = experiencePreviewText,
-            publishedDate = publishedDate
+            publishedDate = publishedDate,
+            isFavorite = favoriteVacanciesId?.contains(id) ?: false
         )
     }
 
-    fun vacancyToVacancyCardUiList(vacancyList: List<Vacancy>) =
-        vacancyList.map { vacancyToVacancyCardUi(it) }
+    fun vacancyToVacancyCardUiList(
+        vacancyList: List<Vacancy>,
+        favoriteVacanciesId: List<String>? = emptyList()
+    ) =
+        vacancyList.map { vacancyToVacancyCardUi(it, favoriteVacanciesId) }
 
     fun offerToOfferUi(offer: Offer) = offer.run {
         OfferUI(
