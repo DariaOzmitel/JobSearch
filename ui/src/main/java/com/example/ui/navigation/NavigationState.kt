@@ -9,10 +9,9 @@ class NavigationState(val navHostController: NavHostController) {
     fun navigateTo(route: String) {
         navHostController.navigate(route) {
             popUpTo(Screen.Main.route) {
-                saveState = true
+                inclusive = true
             }
             launchSingleTop = true
-            restoreState = true
         }
     }
 

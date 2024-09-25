@@ -9,8 +9,6 @@ interface JobSearchRepository {
     suspend fun getOfferList(): List<Offer>
     suspend fun addUser(mail: String)
     suspend fun checkAuthorization(): Boolean
-    suspend fun addFavoriteVacancy(vacancyId: String)
-    suspend fun deleteFromFavorites(vacancyId: String)
     suspend fun changeFavoriteStatus(vacancyId: String)
-    suspend fun getFavoriteVacanciesList(): List<String>?
+    suspend fun getFavoriteVacanciesList(): List<Vacancy>
 }

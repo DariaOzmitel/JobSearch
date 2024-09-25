@@ -9,6 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.example.ui.R
 import com.example.ui.screens.enterPin.EnterPinScreen
+import com.example.ui.screens.favorites.FavoriteScreen
 import com.example.ui.screens.logIn.LogInScreen
 import com.example.ui.screens.main.MainScreen
 import com.example.ui.screens.root.RootScreen
@@ -53,7 +54,15 @@ fun InstallAppNavGraph() {
                 }
             }
         },
-        favoritesScreenContent = {},
+        favoritesScreenContent = {
+            RootScreen(navigationState = navigationState) { innerPadding ->
+                FavoriteScreen(
+                    innerPadding = innerPadding,
+                    onButtonClickListener = {}) { vacancyId ->
+                    navigationState.navigateToVacancy(vacancyId)
+                }
+            }
+        },
         responsesScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
                 Image(

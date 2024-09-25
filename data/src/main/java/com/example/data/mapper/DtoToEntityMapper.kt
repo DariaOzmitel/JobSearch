@@ -7,7 +7,7 @@ import com.example.domain.models.Offer
 import com.example.domain.models.Vacancy
 
 class DtoToEntityMapper {
-    fun mapVacancyDtoToEntity(dto: VacancyDto) =
+    fun mapVacancyDtoToEntity(dto: VacancyDto, favoriteVacanciesId: List<String>? = null) =
         dto.run {
             Vacancy(
                 id = id,
@@ -27,12 +27,16 @@ class DtoToEntityMapper {
                 description = description,
                 responsibilities = responsibilities,
                 questions = questions,
-                experienceText = experience.text
+                experienceText = experience.text,
+                isFavorite = favoriteVacanciesId?.contains(id) ?: false
             )
         }
 
-    fun mapVacancyDtoListToEntityList(dtoList: List<VacancyDto>?) = dtoList?.map {
-        mapVacancyDtoToEntity(it)
+    fun mapVacancyDtoListToEntityList(
+        dtoList: List<VacancyDto>?,
+        favoriteVacanciesId: List<String>? = emptyList()
+    ) = dtoList?.map {
+        mapVacancyDtoToEntity(it, favoriteVacanciesId)
     }
 
     fun mapOfferDtoToEntity(dto: OfferDto) =

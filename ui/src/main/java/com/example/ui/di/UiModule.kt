@@ -2,6 +2,7 @@ package com.example.ui.di
 
 import com.example.ui.mapper.DomainToUiMapper
 import com.example.ui.screens.enterPin.EnterPinScreenViewModel
+import com.example.ui.screens.favorites.FavoriteScreenViewModel
 import com.example.ui.screens.logIn.LogInScreenViewModel
 import com.example.ui.screens.main.MainScreenViewModel
 import com.example.ui.screens.splash.SplashScreenViewModel
@@ -18,5 +19,6 @@ val uiModule = module {
     viewModelOf(::LogInScreenViewModel)
     viewModelOf(::EnterPinScreenViewModel)
     viewModelOf(::SplashScreenViewModel)
+    viewModelOf(::FavoriteScreenViewModel)
     singleOf(::DomainToUiMapper)
 }

@@ -3,7 +3,6 @@ package com.example.ui.screens.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.usecases.ChangeFavoriteStatusUseCase
-import com.example.domain.usecases.GetFavoriteVacanciesListUseCase
 import com.example.domain.usecases.GetOfferListUseCase
 import com.example.domain.usecases.GetVacancyListUseCase
 import com.example.ui.mapper.DomainToUiMapper
@@ -16,7 +15,6 @@ class MainScreenViewModel(
     private val getVacancyListUseCase: GetVacancyListUseCase,
     private val getOfferListUseCase: GetOfferListUseCase,
     private val changeFavoriteStatusUseCase: ChangeFavoriteStatusUseCase,
-    private val getFavoriteVacanciesListUseCase: GetFavoriteVacanciesListUseCase,
     private val mapper: DomainToUiMapper
 ) : ViewModel() {
     private val mainStateMutable =
@@ -34,28 +32,8 @@ class MainScreenViewModel(
     fun changeFavoriteStatus(vacancyId: String) {
         viewModelScope.launch {
             changeFavoriteStatusUseCase.invoke(vacancyId)
-
-            mainStateMutable.update { state ->
-
-                when (state) {
-                    is MainState.VacancyList -> {
-                        val updatedList = state.vacancyList.map { vacancy ->
-                            when {
-                                vacancy.id == vacancyId -> vacancy.copy(isFavorite = !vacancy.isFavorite)
-                                else -> vacancy
-                            }
-                        }
-                        state.copy(vacancyList = updatedList)
-                    }
-
-                    MainState.Loading -> state
-                }
-            }
+            getVacancyList()
         }
-    }
-
-    private suspend fun getFavoriteVacanciesList(): List<String>? {
-        return getFavoriteVacanciesListUseCase.invoke()
     }
 
     private fun getVacancyList() {
@@ -63,8 +41,7 @@ class MainScreenViewModel(
             mainStateMutable.update {
                 MainState.VacancyList(
                     mapper.vacancyToVacancyCardUiList(
-                        getVacancyListUseCase.invoke(),
-                        getFavoriteVacanciesList()
+                        getVacancyListUseCase.invoke()
                     ),
                     offerList = mapper.offerToOfferCardUiList(getOfferListUseCase.invoke())
                 )

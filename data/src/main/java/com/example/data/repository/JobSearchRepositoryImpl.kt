@@ -18,13 +18,14 @@ class JobSearchRepositoryImpl(
 ) : JobSearchRepository {
     override suspend fun getVacancyList(): List<Vacancy> {
         val vacancyListDto = apiService.getVacancyList().vacancies
-        return mapper.mapVacancyDtoListToEntityList(vacancyListDto) ?: emptyList()
+        val favoriteVacanciesList = getFavoriteVacanciesListFromDb()
+        return mapper.mapVacancyDtoListToEntityList(vacancyListDto, favoriteVacanciesList)
+            ?: emptyList()
     }
 
     override suspend fun getVacancy(id: String): Vacancy {
         val vacancyList = getVacancyList()
-        return vacancyList.find { it.id == id }
-            ?: throw NoSuchElementException("Vacancy with id $id not found")
+        return vacancyList.first { it.id == id }
     }
 
     override suspend fun getOfferList(): List<Offer> {
@@ -40,14 +41,6 @@ class JobSearchRepositoryImpl(
         return userDao.checkAuthorization() != null
     }
 
-    override suspend fun addFavoriteVacancy(vacancyId: String) {
-        favoriteVacanciesDao.addFavoriteVacancy(FavoriteVacanciesDbModel(vacancyId))
-    }
-
-    override suspend fun deleteFromFavorites(vacancyId: String) {
-        favoriteVacanciesDao.deleteFromFavorites(vacancyId)
-    }
-
     override suspend fun changeFavoriteStatus(vacancyId: String) {
         val isVacancyFavorite = favoriteVacanciesDao.isVacancyFavorite(vacancyId) > 0
         when (isVacancyFavorite) {
@@ -61,7 +54,20 @@ class JobSearchRepositoryImpl(
         }
     }
 
-    override suspend fun getFavoriteVacanciesList(): List<String>? {
+    override suspend fun getFavoriteVacanciesList(): List<Vacancy> {
+        val vacancyList = getVacancyList()
+        return vacancyList.filter { it.isFavorite }
+    }
+
+    private suspend fun addFavoriteVacancy(vacancyId: String) {
+        favoriteVacanciesDao.addFavoriteVacancy(FavoriteVacanciesDbModel(vacancyId))
+    }
+
+    private suspend fun deleteFromFavorites(vacancyId: String) {
+        favoriteVacanciesDao.deleteFromFavorites(vacancyId)
+    }
+
+    private suspend fun getFavoriteVacanciesListFromDb(): List<String>? {
         return favoriteVacanciesDao.getFavoriteVacanciesList()?.map { it.vacancyId }
     }
 }

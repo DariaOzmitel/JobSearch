@@ -14,5 +14,6 @@ data class Vacancy(
     val appliedNumber: Int?,
     val description: String?,
     val responsibilities: String,
+    val isFavorite: Boolean = false,
     val questions: List<String>
 )
