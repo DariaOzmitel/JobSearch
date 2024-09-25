@@ -111,7 +111,9 @@ fun InstallAppNavGraph() {
         },
         vacancyScreenContent = {
             RootScreen(navigationState = navigationState) { innerPadding ->
-                VacancyScreen(innerPadding = innerPadding)
+                VacancyScreen(innerPadding = innerPadding) {
+                    navigationState.navHostController.navigateUp()
+                }
             }
         }
     )

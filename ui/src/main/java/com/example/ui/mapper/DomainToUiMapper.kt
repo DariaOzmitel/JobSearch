@@ -6,9 +6,19 @@ import com.example.ui.R
 import com.example.ui.models.OfferUI
 import com.example.ui.models.VacancyCardUI
 import com.example.ui.models.VacancyForScreenUi
+import java.text.SimpleDateFormat
 import java.util.Locale
 
 class DomainToUiMapper {
+
+    fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale("ru"))
+        val outputFormat = SimpleDateFormat("d MMMM", Locale("ru"))
+
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date!!)
+    }
+
     fun vacancyToVacancyCardUi(vacancy: Vacancy) = vacancy.run {
         VacancyCardUI(
             id = id,
@@ -17,7 +27,7 @@ class DomainToUiMapper {
             town = address.town,
             company = company,
             experienceText = experiencePreviewText,
-            publishedDate = publishedDate,
+            publishedDate = formatDate(publishedDate),
             isFavorite = isFavorite
         )
     }
@@ -45,6 +55,8 @@ class DomainToUiMapper {
 
     fun vacancyToVacancyScreenUi(vacancy: Vacancy) = vacancy.run {
         VacancyForScreenUi(
+            id = id,
+            isFavorite = isFavorite,
             lookingNumber = lookingNumber,
             title = title,
             address = "${address.town}, ${address.street}, ${address.house}",

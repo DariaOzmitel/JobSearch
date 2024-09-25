@@ -51,6 +51,7 @@ val mockVacanciesList = listOf(
 )
 
 val mockVacancyForScreen = VacancyForScreenUi(
+    id = "gjh",
     lookingNumber = 5,
     title = "Старший Android разработчик",
     address = "Москва, ул. Примерная, д. 123",

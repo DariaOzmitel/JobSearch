@@ -1,6 +1,7 @@
 package com.example.ui.screens.vacancy
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,6 +26,7 @@ import com.example.ui.elements.text.Text1
 import com.example.ui.elements.text.TextTitle1
 import com.example.ui.elements.text.TextTitle2
 import com.example.ui.elements.text.TextTitle4
+import com.example.ui.mockVacancyForScreen
 import com.example.ui.models.VacancyForScreenUi
 import com.example.ui.molecules.cards.CompanyCard
 import com.example.ui.molecules.cards.GreenCard
@@ -33,7 +35,11 @@ import com.example.ui.theme.JobSearchTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun VacancyScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
+fun VacancyScreen(
+    modifier: Modifier = Modifier,
+    innerPadding: PaddingValues,
+    onArrowClickListener: () -> Unit
+) {
     val viewModel: VacancyScreenViewModel = koinViewModel()
     val vacancyState by viewModel.getVacancyState().collectAsStateWithLifecycle()
 
@@ -45,7 +51,9 @@ fun VacancyScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
             VacancyScreenContent(
                 modifier = modifier,
                 innerPadding = innerPadding,
-                vacancy = state.vacancy
+                vacancy = state.vacancy,
+                onArrowClickListener = onArrowClickListener,
+                onImageClickListener = { viewModel.changeFavoriteStatus(it) }
             )
         }
     }
@@ -55,7 +63,9 @@ fun VacancyScreen(modifier: Modifier = Modifier, innerPadding: PaddingValues) {
 fun VacancyScreenContent(
     modifier: Modifier = Modifier,
     innerPadding: PaddingValues,
-    vacancy: VacancyForScreenUi
+    vacancy: VacancyForScreenUi,
+    onImageClickListener: (String) -> Unit,
+    onArrowClickListener: () -> Unit
 ) {
     LazyColumn(
         modifier = modifier.padding(
@@ -72,6 +82,9 @@ fun VacancyScreenContent(
             ) {
                 Box(Modifier.weight(1f)) {
                     Image(
+                        modifier = Modifier.clickable {
+                            onArrowClickListener()
+                        },
                         painter = painterResource(id = R.drawable.arrow),
                         contentDescription = ""
                     )
@@ -86,7 +99,19 @@ fun VacancyScreenContent(
                     painter = painterResource(id = R.drawable.share),
                     contentDescription = ""
                 )
-                Image(painter = painterResource(id = R.drawable.heart), contentDescription = "")
+                Image(
+                    modifier = Modifier.clickable { onImageClickListener(vacancy.id) },
+                    painter = when (vacancy.isFavorite) {
+                        true -> {
+                            painterResource(id = R.drawable.heart)
+                        }
+
+                        false -> {
+                            painterResource(id = R.drawable.favorites)
+                        }
+                    },
+                    contentDescription = ""
+                )
             }
         }
         item {
@@ -203,6 +228,9 @@ fun VacancyScreenContent(
 
 @Preview
 @Composable
-fun VacancyScreenPreview() {
-    VacancyScreen(innerPadding = PaddingValues(0.dp))
+private fun VacancyScreenPreview() {
+    VacancyScreenContent(
+        innerPadding = PaddingValues(0.dp),
+        vacancy = mockVacancyForScreen,
+        onImageClickListener = {}) {}
 }

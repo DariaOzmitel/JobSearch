@@ -3,6 +3,7 @@ package com.example.ui.screens.vacancy
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.domain.usecases.ChangeFavoriteStatusUseCase
 import com.example.domain.usecases.GetVacancyUseCase
 import com.example.ui.mapper.DomainToUiMapper
 import com.example.ui.navigation.Screen
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 class VacancyScreenViewModel(
     private val savedStateHandle: SavedStateHandle,
     private val getVacancyUseCase: GetVacancyUseCase,
+    private val changeFavoriteStatusUseCase: ChangeFavoriteStatusUseCase,
     private val mapper: DomainToUiMapper
 ) : ViewModel() {
     private val vacancyStateMutable =
@@ -31,6 +33,23 @@ class VacancyScreenViewModel(
     private fun getVacancyId(): String {
         return savedStateHandle.get<String>(Screen.KEY_VACANCY_ID)
             ?: throw NoSuchElementException("Vacancy not found")
+    }
+
+    fun changeFavoriteStatus(vacancyId: String) {
+        viewModelScope.launch {
+            changeFavoriteStatusUseCase.invoke(vacancyId)
+            vacancyStateMutable.update { state ->
+                when (state) {
+                    is VacancyState.Vacancy -> {
+                        val updatedVacancy =
+                            state.vacancy.copy(isFavorite = !state.vacancy.isFavorite)
+                        state.copy(vacancy = updatedVacancy)
+                    }
+
+                    VacancyState.Loading -> state
+                }
+            }
+        }
     }
 
     private fun getVacancy() {
