@@ -23,6 +23,7 @@ import com.example.ui.theme.JobSearchTheme
 internal fun JobSearchCard(
     modifier: Modifier = Modifier,
     displayText: String,
+    isButtonEnabled: Boolean,
     onButtonClickListener: () -> Unit,
     onValueChangeListener: (String) -> Unit
 ) {
@@ -48,6 +49,7 @@ internal fun JobSearchCard(
             Row {
                 BlueButton2(
                     modifier = Modifier.weight(1f),
+                    enabled = isButtonEnabled,
                     text = stringResource(id = R.string.resume),
                     onClick = onButtonClickListener
                 )
@@ -63,5 +65,5 @@ internal fun JobSearchCard(
 @Preview
 @Composable
 private fun JobSearchCardPreview() {
-    JobSearchCard(displayText = "", onButtonClickListener = {}) {}
+    JobSearchCard(displayText = "", isButtonEnabled = true, onButtonClickListener = {}) {}
 }

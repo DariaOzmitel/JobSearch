@@ -30,14 +30,7 @@ internal class FavoriteScreenViewModel(
 
     fun getFavoriteState(): StateFlow<FavoriteState> = favoriteState
 
-    fun changeFavoriteStatus(vacancyId: String) {
-        viewModelScope.launch {
-            changeFavoriteStatusUseCase.invoke(vacancyId)
-            getFavoriteVacanciesList()
-        }
-    }
-
-    private fun getFavoriteVacanciesList() {
+    fun getFavoriteVacanciesList() {
         viewModelScope.launch {
             favoriteStateMutable.update {
                 FavoriteState.VacancyList(
@@ -46,6 +39,13 @@ internal class FavoriteScreenViewModel(
                     )
                 )
             }
+        }
+    }
+
+    fun changeFavoriteStatus(vacancyId: String) {
+        viewModelScope.launch {
+            changeFavoriteStatusUseCase.invoke(vacancyId)
+            getFavoriteVacanciesList()
         }
     }
 }

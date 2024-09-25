@@ -26,7 +26,11 @@ internal fun LogInScreen(
 ) {
     val viewModel: LogInScreenViewModel = koinViewModel()
     val mail by viewModel.getLogInMail().collectAsStateWithLifecycle()
-    LogInScreenContent(innerPadding = innerPadding, mail = mail, onButtonClickListener = {
+    LogInScreenContent(
+        modifier = modifier,
+        innerPadding = innerPadding,
+        mail = mail,
+        onButtonClickListener = {
         onButtonClickListener(
             mail
         )
@@ -59,6 +63,7 @@ private fun LogInScreenContent(
             JobSearchCard(
                 modifier = Modifier.padding(bottom = 16.dp),
                 displayText = mail,
+                isButtonEnabled = mail.isNotEmpty(),
                 onButtonClickListener = onButtonClickListener
             ) {
                 onValueChangeListener(it)
