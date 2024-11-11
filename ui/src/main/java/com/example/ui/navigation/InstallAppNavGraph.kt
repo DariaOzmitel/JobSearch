@@ -12,7 +12,6 @@ import com.example.ui.screens.enterPin.EnterPinScreen
 import com.example.ui.screens.favorites.FavoriteScreen
 import com.example.ui.screens.logIn.LogInScreen
 import com.example.ui.screens.main.MainScreen
-import com.example.ui.screens.root.RootScreen
 import com.example.ui.screens.splash.SplashScreen
 import com.example.ui.screens.vacanciesByMatch.VacanciesByMatchScreen
 import com.example.ui.screens.vacancy.VacancyScreen
@@ -22,6 +21,7 @@ fun InstallAppNavGraph() {
     val navigationState = rememberNavigationState()
     AppNavGraph(
         navHostController = navigationState.navHostController,
+        navigationState = navigationState,
         splashScreenContent = {
             SplashScreen { authorizationStatus ->
                 when (authorizationStatus) {
@@ -38,100 +38,81 @@ fun InstallAppNavGraph() {
                 }
             }
         },
-        mainScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                MainScreen(innerPadding = innerPadding, onCardClickListener = { vacancyId ->
-                    navigationState.navigateToVacancy(vacancyId)
-                }) {
-                    navigationState.navigateTo(Screen.VacanciesByMatch.route)
-                }
-
+        mainScreenContent = { innerPadding ->
+            MainScreen(innerPadding = innerPadding, onCardClickListener = { vacancyId ->
+                navigationState.navigateToVacancy(vacancyId)
+            }) {
+                navigationState.navigateTo(Screen.VacanciesByMatch.route)
             }
         },
-        logInScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                LogInScreen(innerPadding = innerPadding, onButtonClickListener = { mail ->
-                    navigationState.navigateToEnterPin(mail)
-                })
-            }
+        logInScreenContent = { innerPadding ->
+            LogInScreen(innerPadding = innerPadding, onButtonClickListener = { mail ->
+                navigationState.navigateToEnterPin(mail)
+            })
         },
-        enterPinScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                EnterPinScreen(innerPadding = innerPadding) {
-                    navigationState.navigateTo(
-                        route = Screen.Main.route,
-                        inclusive = true,
-                        popUpToScreen = Screen.EnterPin.route
-                    )
-                }
-            }
-        },
-        favoritesScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                FavoriteScreen(
-                    innerPadding = innerPadding,
-                    onButtonClickListener = {}) { vacancyId ->
-                    navigationState.navigateToVacancy(
-                        vacancyId = vacancyId,
-                        popUpToScreen = Screen.Favorites.route
-                    )
-                }
-            }
-        },
-        responsesScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    painter = painterResource(id = R.drawable.responses_example),
-                    contentDescription = stringResource(
-                        id = R.string.responses
-                    )
+        enterPinScreenContent = { innerPadding ->
+            EnterPinScreen(innerPadding = innerPadding) {
+                navigationState.navigateTo(
+                    route = Screen.Main.route,
+                    inclusive = true,
+                    popUpToScreen = Screen.EnterPin.route
                 )
             }
         },
-        messagesScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    painter = painterResource(id = R.drawable.messages_example),
-                    contentDescription = stringResource(
-                        id = R.string.messages
-                    )
+        favoritesScreenContent = { innerPadding ->
+            FavoriteScreen(
+                innerPadding = innerPadding,
+                onButtonClickListener = {}) { vacancyId ->
+                navigationState.navigateToVacancy(
+                    vacancyId = vacancyId,
+                    popUpToScreen = Screen.Favorites.route
                 )
             }
         },
-        profileScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                Image(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(innerPadding),
-                    painter = painterResource(id = R.drawable.profile_examples),
-                    contentDescription = stringResource(
-                        id = R.string.profile
-                    )
+        responsesScreenContent = { innerPadding ->
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                painter = painterResource(id = R.drawable.responses_example),
+                contentDescription = stringResource(
+                    id = R.string.responses
+                )
+            )
+        },
+        messagesScreenContent = { innerPadding ->
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                painter = painterResource(id = R.drawable.messages_example),
+                contentDescription = stringResource(
+                    id = R.string.messages
+                )
+            )
+        },
+        profileScreenContent = { innerPadding ->
+            Image(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding),
+                painter = painterResource(id = R.drawable.profile_examples),
+                contentDescription = stringResource(
+                    id = R.string.profile
+                )
+            )
+        },
+        vacanciesByMatchScreenContent = { innerPadding ->
+            VacanciesByMatchScreen(innerPadding = innerPadding) { vacancyId ->
+                navigationState.navigateToVacancy(
+                    vacancyId = vacancyId,
+                    popUpToScreen = Screen.VacanciesByMatch.route
                 )
             }
         },
-        vacanciesByMatchScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                VacanciesByMatchScreen(innerPadding = innerPadding) { vacancyId ->
-                    navigationState.navigateToVacancy(
-                        vacancyId = vacancyId,
-                        popUpToScreen = Screen.VacanciesByMatch.route
-                    )
-                }
-            }
-        },
-        vacancyScreenContent = {
-            RootScreen(navigationState = navigationState) { innerPadding ->
-                VacancyScreen(innerPadding = innerPadding) {
-                    navigationState.navHostController.navigateUp()
-                }
+        vacancyScreenContent = { innerPadding ->
+            VacancyScreen(innerPadding = innerPadding) {
+                navigationState.navHostController.navigateUp()
             }
         }
     )

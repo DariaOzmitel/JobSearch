@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -43,9 +42,6 @@ internal fun VacanciesByMatchScreen(
             ProgressIndicator()
 
         is VacanciesByMatchState.VacancyList -> {
-            LaunchedEffect(Unit) {
-                viewModel.getVacancyList()
-            }
             VacanciesByMatchScreenContent(
                 modifier = modifier,
                 innerPadding = innerPadding,

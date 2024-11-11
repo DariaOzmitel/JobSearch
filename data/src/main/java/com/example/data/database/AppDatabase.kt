@@ -11,7 +11,7 @@ import com.example.data.database.user.UserDbModel
 
 @Database(
     entities = [UserDbModel::class, FavoriteVacanciesDbModel::class],
-    version = 10,
+    version = 11,
     exportSchema = false
 )
 internal abstract class AppDatabase : RoomDatabase() {

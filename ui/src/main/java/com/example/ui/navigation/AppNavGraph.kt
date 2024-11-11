@@ -1,61 +1,66 @@
 package com.example.ui.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.ui.screens.root.RootScreen
 
 @Composable
 internal fun AppNavGraph(
     navHostController: NavHostController,
-    mainScreenContent: @Composable () -> Unit,
-    vacanciesByMatchScreenContent: @Composable () -> Unit,
-    vacancyScreenContent: @Composable () -> Unit,
-    favoritesScreenContent: @Composable () -> Unit,
-    responsesScreenContent: @Composable () -> Unit,
-    messagesScreenContent: @Composable () -> Unit,
-    profileScreenContent: @Composable () -> Unit,
-    logInScreenContent: @Composable () -> Unit,
-    enterPinScreenContent: @Composable () -> Unit,
+    navigationState: NavigationState,
+    mainScreenContent: @Composable (PaddingValues) -> Unit,
+    vacanciesByMatchScreenContent: @Composable (PaddingValues) -> Unit,
+    vacancyScreenContent: @Composable (PaddingValues) -> Unit,
+    favoritesScreenContent: @Composable (PaddingValues) -> Unit,
+    responsesScreenContent: @Composable (PaddingValues) -> Unit,
+    messagesScreenContent: @Composable (PaddingValues) -> Unit,
+    profileScreenContent: @Composable (PaddingValues) -> Unit,
+    logInScreenContent: @Composable (PaddingValues) -> Unit,
+    enterPinScreenContent: @Composable (PaddingValues) -> Unit,
     splashScreenContent: @Composable () -> Unit,
 ) {
-    NavHost(
-        navController = navHostController,
-        startDestination = Screen.Splash.route
-    ) {
-        composable(Screen.Splash.route) {
-            splashScreenContent()
-        }
-        composable(Screen.LogIn.route) {
-            logInScreenContent()
-        }
-        composable(route = Screen.EnterPin.route,
-            arguments = listOf(
-                navArgument(name = Screen.KEY_MAIL) {
-                    type = NavType.StringType
-                }
-            )
+    RootScreen(navigationState = navigationState) { innerPadding ->
+        NavHost(
+            navController = navHostController,
+            startDestination = Screen.Splash.route
         ) {
-            enterPinScreenContent()
-        }
-        searchNavGraph(
-            mainScreenContent = mainScreenContent,
-            vacanciesByMatchScreenContent = vacanciesByMatchScreenContent,
-            vacancyScreenContent = vacancyScreenContent
-        )
-        composable(Screen.Favorites.route) {
-            favoritesScreenContent()
-        }
-        composable(Screen.Responses.route) {
-            responsesScreenContent()
-        }
-        composable(Screen.Messages.route) {
-            messagesScreenContent()
-        }
-        composable(Screen.Profile.route) {
-            profileScreenContent()
+            composable(Screen.Splash.route) {
+                splashScreenContent()
+            }
+            composable(Screen.LogIn.route) {
+                logInScreenContent(innerPadding)
+            }
+            composable(route = Screen.EnterPin.route,
+                arguments = listOf(
+                    navArgument(name = Screen.KEY_MAIL) {
+                        type = NavType.StringType
+                    }
+                )
+            ) {
+                enterPinScreenContent(innerPadding)
+            }
+            searchNavGraph(
+                mainScreenContent = { mainScreenContent(innerPadding) },
+                vacanciesByMatchScreenContent = { vacanciesByMatchScreenContent(innerPadding) },
+                vacancyScreenContent = { vacancyScreenContent(innerPadding) }
+            )
+            composable(Screen.Favorites.route) {
+                favoritesScreenContent(innerPadding)
+            }
+            composable(Screen.Responses.route) {
+                responsesScreenContent(innerPadding)
+            }
+            composable(Screen.Messages.route) {
+                messagesScreenContent(innerPadding)
+            }
+            composable(Screen.Profile.route) {
+                profileScreenContent(innerPadding)
+            }
         }
     }
 }
