@@ -22,8 +22,10 @@ internal class SplashScreenViewModel(private val checkAuthorizationUseCase: Chec
 
     private fun checkAuthorization() {
         viewModelScope.launch {
-            isUserAuthorizedMutable.update {
-                checkAuthorizationUseCase.invoke()
+            checkAuthorizationUseCase.invoke().collect { authorizationStatus ->
+                isUserAuthorizedMutable.update {
+                    authorizationStatus
+                }
             }
         }
     }

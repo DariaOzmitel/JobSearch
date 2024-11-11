@@ -1,11 +1,12 @@
 package com.example.domain.usecases
 
-import com.example.domain.repository.JobSearchRepository
+import com.example.domain.repository.AuthorizationRepository
+import kotlinx.coroutines.flow.Flow
 
 class CheckAuthorizationUseCase(
-    private val repository: JobSearchRepository
+    private val repository: AuthorizationRepository
 ) {
-    suspend fun invoke(): Boolean {
+    fun invoke(): Flow<Boolean> {
         return repository.checkAuthorization()
     }
 }

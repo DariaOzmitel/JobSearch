@@ -31,19 +31,21 @@ internal class VacanciesByMatchScreenViewModel(
     fun changeFavoriteStatus(vacancyId: String) {
         viewModelScope.launch {
             changeFavoriteStatusUseCase.invoke(vacancyId)
-            getVacancyList()
         }
     }
 
-    fun getVacancyList() {
+    private fun getVacancyList() {
         viewModelScope.launch {
-            vacanciesByMatchStateMutable.update {
-                VacanciesByMatchState.VacancyList(
-                    mapper.vacancyToVacancyCardUiList(
-                        getVacancyListUseCase.invoke()
+            getVacancyListUseCase.invoke().collect { vacancyList ->
+                vacanciesByMatchStateMutable.update {
+                    VacanciesByMatchState.VacancyList(
+                        mapper.vacancyToVacancyCardUiList(
+                            vacancyList
+                        )
                     )
-                )
+                }
             }
+
         }
     }
 }

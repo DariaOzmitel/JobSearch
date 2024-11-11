@@ -7,14 +7,17 @@ import com.example.data.database.user.UserDao
 import com.example.data.mapper.DtoToEntityMapper
 import com.example.data.network.ApiFactory
 import com.example.data.network.ApiService
-import com.example.data.repository.JobSearchRepositoryImpl
-import com.example.domain.repository.JobSearchRepository
+import com.example.data.repository.AuthorizationRepositoryImpl
+import com.example.data.repository.VacancyRepositoryImpl
+import com.example.domain.repository.AuthorizationRepository
+import com.example.domain.repository.VacancyRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val dataModule = module {
-    singleOf(::JobSearchRepositoryImpl) bind JobSearchRepository::class
+    singleOf(::VacancyRepositoryImpl) bind VacancyRepository::class
+    singleOf(::AuthorizationRepositoryImpl) bind AuthorizationRepository::class
     single<ApiService> { ApiFactory.apiService }
     singleOf(::provideUserDao)
     singleOf(::provideFavoriteVacanciesDao)

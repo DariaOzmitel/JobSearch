@@ -4,17 +4,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 internal interface FavoriteVacanciesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addFavoriteVacancy(favoriteVacanciesDbModel: FavoriteVacanciesDbModel)
 
-    @Query("SELECT COUNT(*) FROM FavoriteVacanciesDbModel WHERE vacancyId = :vacancyId")
-    suspend fun isVacancyFavorite(vacancyId: String): Int
+    @Query("SELECT COUNT(*) > 0 FROM FavoriteVacanciesDbModel WHERE vacancyId = :vacancyId")
+    fun isVacancyFavorite(vacancyId: String): Flow<Boolean>
 
     @Query("SELECT * FROM FavoriteVacanciesDbModel")
-    suspend fun getFavoriteVacanciesList(): List<FavoriteVacanciesDbModel>?
+    fun getFavoriteVacanciesList(): Flow<List<FavoriteVacanciesDbModel>>
 
     @Query("DELETE FROM FavoriteVacanciesDbModel WHERE vacancyId=:vacancyId")
     suspend fun deleteFromFavorites(vacancyId: String)

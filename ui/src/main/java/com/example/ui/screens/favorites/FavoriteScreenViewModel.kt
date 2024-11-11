@@ -30,12 +30,14 @@ internal class FavoriteScreenViewModel(
 
     private fun getFavoriteVacanciesList() {
         viewModelScope.launch {
-            favoriteStateMutable.update {
-                FavoriteState.VacancyList(
-                    mapper.vacancyToVacancyCardUiList(
-                        getFavoriteVacanciesListUseCase.invoke()
+            getFavoriteVacanciesListUseCase.invoke().collect { favoriteVacancies ->
+                favoriteStateMutable.update {
+                    FavoriteState.VacancyList(
+                        mapper.vacancyToVacancyCardUiList(
+                            favoriteVacancies
+                        )
                     )
-                )
+                }
             }
         }
     }
@@ -43,7 +45,6 @@ internal class FavoriteScreenViewModel(
     fun changeFavoriteStatus(vacancyId: String) {
         viewModelScope.launch {
             changeFavoriteStatusUseCase.invoke(vacancyId)
-            getFavoriteVacanciesList()
         }
     }
 }

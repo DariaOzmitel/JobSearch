@@ -1,6 +1,8 @@
 package com.example.domain.repository
 
+import kotlinx.coroutines.flow.Flow
+
 interface AuthorizationRepository {
     suspend fun addUser(mail: String)
-    suspend fun checkAuthorization(): Boolean
+    fun checkAuthorization(): Flow<Boolean>
 }

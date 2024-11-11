@@ -33,17 +33,17 @@ internal class VacancyScreenViewModel(
     fun changeFavoriteStatus(vacancyId: String) {
         viewModelScope.launch {
             changeFavoriteStatusUseCase.invoke(vacancyId)
-            vacancyStateMutable.update { state ->
-                when (state) {
-                    is VacancyState.Vacancy -> {
-                        val updatedVacancy =
-                            state.vacancy.copy(isFavorite = !state.vacancy.isFavorite)
-                        state.copy(vacancy = updatedVacancy)
-                    }
-
-                    VacancyState.Loading -> state
-                }
-            }
+//            vacancyStateMutable.update { state ->
+//                when (state) {
+//                    is VacancyState.Vacancy -> {
+//                        val updatedVacancy =
+//                            state.vacancy.copy(isFavorite = !state.vacancy.isFavorite)
+//                        state.copy(vacancy = updatedVacancy)
+//                    }
+//
+//                    VacancyState.Loading -> state
+//                }
+//            }
         }
     }
 
@@ -54,12 +54,14 @@ internal class VacancyScreenViewModel(
 
     private fun getVacancy() {
         viewModelScope.launch {
-            vacancyStateMutable.update {
-                VacancyState.Vacancy(
-                    mapper.vacancyToVacancyScreenUi(
-                        getVacancyUseCase.invoke(getVacancyId())
+            getVacancyUseCase.invoke(getVacancyId()).collect { vacancy ->
+                vacancyStateMutable.update {
+                    VacancyState.Vacancy(
+                        mapper.vacancyToVacancyScreenUi(
+                            vacancy
+                        )
                     )
-                )
+                }
             }
         }
     }

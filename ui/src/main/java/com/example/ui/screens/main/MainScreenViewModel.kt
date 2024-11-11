@@ -8,6 +8,7 @@ import com.example.domain.usecases.GetVacancyListUseCase
 import com.example.ui.mapper.DomainToUiMapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -32,19 +33,25 @@ internal class MainScreenViewModel(
     fun changeFavoriteStatus(vacancyId: String) {
         viewModelScope.launch {
             changeFavoriteStatusUseCase.invoke(vacancyId)
-            getVacancyList()
         }
     }
 
-    fun getVacancyList() {
+    private fun getVacancyList() {
         viewModelScope.launch {
-            mainStateMutable.update {
+            combine(
+                getVacancyListUseCase.invoke(),
+                getOfferListUseCase.invoke()
+            ) { vacancyList, offerList ->
                 MainState.VacancyList(
                     mapper.vacancyToVacancyCardUiList(
-                        getVacancyListUseCase.invoke()
+                        vacancyList = vacancyList
                     ),
-                    offerList = mapper.offerToOfferCardUiList(getOfferListUseCase.invoke())
+                    offerList = mapper.offerToOfferCardUiList(offerList)
                 )
+            }.collect { state ->
+                mainStateMutable.update {
+                    state
+                }
             }
         }
     }

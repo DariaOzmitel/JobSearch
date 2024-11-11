@@ -1,12 +1,13 @@
 package com.example.domain.usecases
 
 import com.example.domain.models.Vacancy
-import com.example.domain.repository.JobSearchRepository
+import com.example.domain.repository.VacancyRepository
+import kotlinx.coroutines.flow.Flow
 
 class GetVacancyUseCase(
-    private val repository: JobSearchRepository
+    private val repository: VacancyRepository
 ) {
-    suspend fun invoke(id: String): Vacancy {
+    fun invoke(id: String): Flow<Vacancy> {
         return repository.getVacancy(id)
     }
 }
